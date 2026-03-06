@@ -121,7 +121,7 @@
         .inline-confirm-btn { background: var(--gold); color: #000; border: none; padding: 8px 0; width: 90%; border-radius: 10px; font-family: var(--font-head); font-size: 13px; font-weight: 900; cursor: pointer; box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4); animation: fadeIn 0.3s ease forwards; }
         .inline-confirm-btn.submitting { opacity: 0.7; cursor: wait; filter: grayscale(0.5); }
 
-        /* 5. 零徽章引導卡片 (移除虛線，改為精緻 Bento) */
+        /* 5. 零徽章引導卡片 */
         .zero-badge-hero { max-width: 600px; margin: 30px auto; padding: 40px 20px; text-align: center; background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); border-radius: 32px; backdrop-filter: blur(10px); }
         .zero-badge-hero p { font-size: 16px; font-weight: 700; color: var(--text-dim); margin-bottom: 20px; }
         .hero-btn { background: var(--gold); color: #000; padding: 14px 30px; border-radius: 100px; font-size: 15px; font-weight: 900; border: none; cursor: pointer; box-shadow: 0 0 30px rgba(251, 191, 36, 0.3); transition: 0.3s; }
@@ -150,6 +150,8 @@
         .lib-name { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 4px; display: block; }
         .lib-subtitle { font-size: 11px; font-weight: 700; color: var(--gold); margin-bottom: 4px; display: block; opacity: 0.9; }
         .lib-desc { font-size: 12px; font-weight: 500; color: var(--text-dim); line-height: 1.4; display: block; }
+        /* 新增：抽離出來的日期小標籤 */
+        .lib-date { display: inline-flex; align-items: center; font-size: 10px; font-weight: 600; color: #cbd5e1; background: rgba(255, 255, 255, 0.1); padding: 3px 6px; border-radius: 4px; margin-top: 5px; }
         .owned-tag { position: absolute; top: 12px; right: 15px; color: var(--gold); font-size: 10px; font-weight: 900; }
 
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 20000; display: none; align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: 0.3s; }
@@ -172,7 +174,7 @@
         <span class="username-line" id="ui-username-display">帳號：----</span>
         <div class="bento-row">
             <div class="bento-card blue"><span class="b-label" id="lbl-total">徽章總數</span><div class="b-val blue" id="ui-count">--</div><span class="b-sub" id="lbl-realtime">帳號即時資產</span></div>
-            <div class="bento-card gold-cta" id="ui-all-btn" onclick="toggleAllBadges(true)"><span class="b-label" id="lbl-site-lib">全站歷史收藏</span><div class="b-val gold">73+</div><span class="b-sub" id="lbl-view-lib">點擊查看圖鑑</span></div>
+            <div class="bento-card gold-cta" id="ui-all-btn" onclick="toggleAllBadges(true)"><span class="b-label" id="lbl-site-lib">全站歷史收藏</span><div class="b-val gold" id="ui-total-db-count">--</div><span class="b-sub" id="lbl-view-lib">點擊查看圖鑑</span></div>
         </div>
     </header>
 
@@ -200,7 +202,6 @@
         <span class="hint-value" id="ui-hint-value">---</span>
     </div>
 
-    <!-- 零徽章引導 -->
     <div id="zero-badge-hero" class="zero-badge-hero" style="display: none;">
         <p id="ui-zero-msg">您目前尚未擁有任何直播間徽章</p>
         <button class="hero-btn" onclick="toggleAllBadges(true)" id="ui-zero-cta">全站歷史徽章庫</button>
@@ -225,7 +226,7 @@
     <div class="modal-overlay" id="custom-modal"><div class="modal-content"><div class="modal-text" id="modal-msg"></div><button class="modal-btn" id="ui-modal-btn" onclick="closeModal()">OK</button></div></div>
 
     <script>
-        // --- 1. 嚴格鎖定：全站徽章資料庫 (新增英譯) ---
+        // --- 1. 嚴格鎖定：全站徽章資料庫 ---
         const GLOBAL_BADGE_DB = {
     "campaign_battlepass_s5": { 
         "zh-hant": { title: "Battle Pass 滿等榮耀", sub: "Battle Pass 賽季滿等", desc: "於 Battle Pass 賽季達到滿等，依照完成賽季給予徽章" },
@@ -611,6 +612,7 @@ function updateUIStrings() {
             } catch (e) { box.innerHTML = "Error Loading Data"; }
         }
 
+        // 修改：動態抽離日期並加上美化樣式
         function toggleAllBadges(show) {
             const overlay = document.getElementById('all-badges-overlay');
             if (show) {
@@ -621,6 +623,16 @@ function updateUIStrings() {
                 list.innerHTML = Object.entries(GLOBAL_BADGE_DB).map(([id, langData]) => {
                     const info = langData[state.lang] || langData['zh-hant'];
                     const owned = state.ownedIds.includes(id);
+                    
+                    // 正則抽取尾部的 (202X...)
+                    let descText = info.desc;
+                    let dateHtml = '';
+                    const dateMatch = descText.match(/\s*\((20\d{2}[^)]*)\)$/);
+                    if (dateMatch) {
+                        descText = descText.replace(dateMatch[0], ''); // 將日期從文字中移除
+                        dateHtml = `<div class="lib-date">🗓 ${dateMatch[1]}</div>`; // 獨立為小標籤
+                    }
+
                     return `
                         <div class="lib-card ${owned?'owned':''}">
                             ${owned?`<div class="owned-tag">${t.got_it} ✓</div>`:''}
@@ -628,7 +640,8 @@ function updateUIStrings() {
                             <div class="lib-info">
                                 <span class="lib-name">${info.title}</span>
                                 <span class="lib-subtitle">${info.sub}</span>
-                                <span class="lib-desc">${info.desc}</span>
+                                <span class="lib-desc">${descText}</span>
+                                ${dateHtml}
                             </div>
                         </div>
                     `;
@@ -671,6 +684,10 @@ function updateUIStrings() {
                 else showModal(`❌: Error`);
             } catch { showModal("Network Error"); } finally { state.isSubmitting = false; render(); check(); }
         }
+
+        // 修改：動態計算資料庫內所有的徽章數量，並寫入到畫面上
+        document.getElementById('ui-total-db-count').innerText = Object.keys(GLOBAL_BADGE_DB).length;
+
         setLang('zh-hant');
     </script>
 </body>
