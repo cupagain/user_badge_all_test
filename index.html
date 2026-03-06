@@ -35,7 +35,7 @@
         .lang-btn.active { background: #fff; color: #000; border-color: #fff; }
 
         /* 1. 標題與帳號 */
-        .header-area { text-align: center; padding: 70px 20px 15px; }
+        .header-area { text-align: center; padding: 80px 20px 15px; }
         @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
         .main-title { 
             font-family: var(--font-head); font-size: 30px; font-weight: 900; letter-spacing: -1px; margin-bottom: 8px;
@@ -45,10 +45,12 @@
         }
         .username-line { font-size: 14px; font-weight: 700; color: var(--gold); margin-bottom: 15px; display: block; opacity: 0.9; }
 
-        .bento-row { max-width: 1000px; margin: 0 auto 20px; padding: 0 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        /* Bento 數據區 - 桌機寬度鎖定 */
+        .bento-row { max-width: 600px; margin: 0 auto 20px; padding: 0 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .bento-card {
             background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 24px;
-            padding: 20px 15px; text-align: center; backdrop-filter: blur(10px); transition: 0.3s;
+            padding: 18px 15px; text-align: center; backdrop-filter: blur(10px); transition: 0.3s;
+            display: flex; flex-direction: column; justify-content: center; min-height: 110px;
         }
         .bento-card.blue { border-color: var(--ice-blue); background: rgba(56, 189, 248, 0.03); }
         .bento-card.gold-cta { 
@@ -75,7 +77,7 @@
         .equipped-box img { width: 75px; height: 75px; margin-bottom: 10px; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.6)); }
         .equipped-box span { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.2; height: 32px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 
-        /* 3. 身份中心與更換按鈕 */
+        /* 3. 身份中心 */
         .control-section { max-width: 600px; margin: 0 auto 20px; padding: 0 16px; }
         .auth-card { background: var(--glass-deep); border: 1px solid var(--glass-border); border-radius: 28px; padding: 24px; backdrop-filter: blur(30px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
         .auth-card.vip-active { border-color: rgba(251, 191, 36, 0.4); }
@@ -84,16 +86,14 @@
         .vip-desc-line { font-size: 13.5px; color: #cbd5e1; font-weight: 600; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
         .lvl-box { border: 1px solid var(--gold); padding: 0 6px; border-radius: 4px; color: var(--gold); font-family: var(--font-head); font-weight: 800; }
 
-        .info-stack { display: flex; flex-direction: column; gap: 16px; }
+        .info-stack { display: flex; flex-direction: column; gap: 12px; }
         .info-row-primary { display: flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 800; color: #fff; height: 34px; }
         .val-lvl-plain { font-family: var(--font-head); font-size: 28px; color: var(--gold); line-height: 1; }
-
-        .info-row-secondary { display: flex; align-items: center; gap: 12px; }
         .val-status { font-size: 15px; font-weight: 800; color: #64748b; line-height: 1; }
         .val-status.unlocked { color: var(--gold); }
-        .upgrade-cta-inline { background: linear-gradient(135deg, var(--pink) 0%, #ff5e7e 100%); color: #fff; font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: 6px; text-decoration: none; display: none; box-shadow: 0 4px 10px rgba(244, 63, 94, 0.3); white-space: nowrap; }
+        .upgrade-cta-inline { background: linear-gradient(135deg, var(--pink) 0%, #ff5e7e 100%); color: #fff; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 6px; text-decoration: none; display: none; box-shadow: 0 4px 10px rgba(244, 63, 94, 0.3); white-space: nowrap; }
 
-        /* 4. 徽章全覽網格 */
+        /* 4. 徽章網格 */
         .instruction-area { text-align: center; margin-bottom: 15px; min-height: 52px; padding: 0 20px; }
         .hint-label { font-size: 11px; font-weight: 700; color: #94a3b8; display: block; margin-bottom: 4px; text-transform: uppercase; }
         .hint-pos-warn { font-size: 11px; font-weight: 600; color: var(--gold); opacity: 0.8; margin-top: 4px; display: block; }
@@ -102,8 +102,8 @@
 
         .badge-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; padding: 0 16px 30px; max-width: 1000px; margin: 0 auto; justify-content: center; }
         @media (min-width: 768px) { .badge-grid { grid-template-columns: repeat(auto-fit, 180px); justify-content: center; } }
-        .badge-item { background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 28px; padding: 30px 10px 10px; text-align: center; cursor: pointer; position: relative; transition: 0.3s; display: flex; flex-direction: column; align-items: center; height: 100%; }
-        .badge-item.selected { border-color: var(--gold); background: rgba(251, 191, 36, 0.12); transform: scale(1.02); }
+        .badge-item { background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 28px; padding: 30px 10px 10px; text-align: center; cursor: pointer; position: relative; transition: 0.4s; display: flex; flex-direction: column; align-items: center; height: 100%; }
+        .badge-item.selected { border-color: var(--gold); background: rgba(251, 191, 36, 0.12); transform: translateY(-5px); }
         .badge-item.selected::after { content: '✓'; position: absolute; top: 12px; right: 15px; color: var(--gold); font-weight: 900; font-size: 18px; }
         .badge-img { width: 75px; height: 75px; margin-bottom: 12px; filter: drop-shadow(0 8px 12px rgba(0,0,0,0.3)); pointer-events: none; }
         .badge-name { font-size: 14px; font-weight: 700; color: #f1f5f9; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-all; pointer-events: none; margin-bottom: 5px; }
@@ -115,17 +115,17 @@
         .zero-badge-hero { max-width: 600px; margin: 30px auto; padding: 40px 20px; text-align: center; background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, transparent 100%); border: 2px dashed var(--gold); border-radius: 32px; }
         .hero-btn { background: var(--gold); color: #000; padding: 15px 35px; border-radius: 100px; font-size: 16px; font-weight: 900; border: none; cursor: pointer; box-shadow: 0 0 40px rgba(251, 191, 36, 0.4); animation: pulse-gold 2s infinite; }
 
-        /* 6. 注意事項清單 */
+        /* 6. 注意事項清單 - 修復對齊與顯示 */
         .footer { max-width: 600px; margin: 60px auto 0; padding: 30px 20px 80px; border-top: 1px solid var(--glass-border); }
         .notice-list { list-style: none; padding: 0; }
         .notice-item { font-size: 13px; color: #64748b; font-weight: 600; line-height: 1.8; margin-bottom: 10px; display: flex; gap: 10px; text-align: left; align-items: flex-start; }
         .notice-item::before { content: "•"; color: #64748b; font-weight: 900; font-size: 18px; line-height: 1.2; flex-shrink: 0; margin-top: 3px; }
         .notice-alert { color: var(--pink) !important; font-weight: 800 !important; }
 
-        /* 7. 全站圖鑑面板 */
+        /* 7. 圖鑑面板 */
         .full-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); backdrop-filter: blur(25px); z-index: 15000; display: none; flex-direction: column; animation: fadeIn 0.3s ease; }
         .overlay-header { padding: 30px 20px; text-align: center; border-bottom: 1px solid var(--glass-border); position: relative; }
-        .overlay-title { font-family: var(--font-head); font-size: 24px; font-weight: 900; color: #fff; }
+        .overlay-title { font-family: var(--font-head); font-size: 22px; font-weight: 900; color: #fff; }
         .close-overlay { position: absolute; right: 20px; top: 30px; font-size: 30px; color: #fff; cursor: pointer; border: none; background: none; }
         .overlay-scroll { flex: 1; overflow-y: auto; padding: 20px; }
         .lib-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
@@ -136,7 +136,8 @@
         .lib-img { width: 55px; height: 55px; flex-shrink: 0; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5)); }
         .lib-info { flex: 1; text-align: left; }
         .lib-name { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 4px; display: block; }
-        .lib-desc { font-size: 11px; font-weight: 500; color: var(--text-dim); line-height: 1.4; display: block; }
+        .lib-subtitle { font-size: 11px; font-weight: 700; color: var(--gold); margin-bottom: 4px; display: block; opacity: 0.9; }
+        .lib-desc { font-size: 12px; font-weight: 500; color: var(--text-dim); line-height: 1.4; display: block; }
         .owned-tag { position: absolute; top: 12px; right: 15px; color: var(--gold); font-size: 10px; font-weight: 900; }
 
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 20000; display: none; align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: 0.3s; }
@@ -144,7 +145,6 @@
         .modal-content { background: #111827; border: 1px solid var(--glass-border); border-radius: 24px; padding: 40px 30px; width: 100%; max-width: 320px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
         .modal-text { font-size: 17px; font-weight: 600; line-height: 1.6; margin-bottom: 25px; color: #fff; }
         .modal-btn { background: var(--gold); color: #000; border: none; padding: 12px 0; width: 100%; border-radius: 12px; font-weight: 800; font-size: 16px; cursor: pointer; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
@@ -158,8 +158,16 @@
         <h1 class="main-title" id="ui-title">我的榮耀徽章全覽</h1>
         <span class="username-line" id="ui-username-display">帳號：----</span>
         <div class="bento-row">
-            <div class="bento-card blue"><span class="b-label" id="lbl-total">徽章總數</span><div class="b-val blue" id="ui-count">--</div></div>
-            <div class="bento-card gold-cta" id="ui-all-btn" onclick="toggleAllBadges(true)"><span class="b-label" id="lbl-site-lib">全站歷史收藏</span><div class="b-val gold">73+</div><span class="b-sub" id="lbl-view-lib">點擊查看圖鑑</span></div>
+            <div class="bento-card blue">
+                <span class="b-label" id="lbl-total">徽章總數</span>
+                <div class="b-val blue" id="ui-count">--</div>
+                <span class="b-sub" id="lbl-realtime">帳號即時資產</span>
+            </div>
+            <div class="bento-card gold-cta" id="ui-all-btn" onclick="toggleAllBadges(true)">
+                <span class="b-label" id="lbl-site-lib">全站歷史徽章庫</span>
+                <div class="b-val gold">73+</div>
+                <span class="b-sub" id="lbl-view-lib">點擊查看圖鑑</span>
+            </div>
         </div>
     </header>
 
@@ -194,7 +202,7 @@
     </div>
 
     <div id="zero-badge-hero" class="zero-badge-hero" style="display: none;">
-        <button class="hero-btn" onclick="toggleAllBadges(true)" id="ui-zero-cta">全站歷史徽章圖鑑</button>
+        <button class="hero-btn" onclick="toggleAllBadges(true)" id="ui-zero-cta">全站歷史徽章庫</button>
     </div>
 
     <main class="badge-grid" id="display"></main>
@@ -214,7 +222,7 @@
     <div class="full-overlay" id="all-badges-overlay">
         <div class="overlay-header">
             <button class="close-overlay" onclick="toggleAllBadges(false)">×</button>
-            <span class="overlay-title" id="ui-all-title">全站歷史徽章圖鑑</span>
+            <span class="overlay-title" id="ui-all-title">全站歷史徽章庫</span>
         </div>
         <div class="overlay-scroll"><div class="lib-grid" id="all-badges-list"></div></div>
     </div>
@@ -223,71 +231,210 @@
 
     <script>
         const GLOBAL_BADGE_DB = {
-            "campaign_battlepass_s5": { "title": "Battle Pass 滿等榮耀", "desc": "於 Battle Pass 第五賽季達到滿等徽章 (2026/2)" },
-            "campaign_battlepass_s4": { "title": "Battle Pass 滿等榮耀", "desc": "於 Battle Pass 第四賽季達到滿等徽章 (2026/1)" },
-            "campaign_battlepass_s3": { "title": "Battle Pass 滿等榮耀", "desc": "於 Battle Pass 第三賽季達到滿等徽章 (2025/12)" },
-            "campaign_battlepass_s2": { "title": "Battle Pass 滿等榮耀", "desc": "於 Battle Pass 第二賽季達到滿等徽章 (2025/11)" },
-            "campaign_battlepass_s1": { "title": "Battle Pass 滿等榮耀", "desc": "於 Battle Pass 第一賽季達到滿等徽章 (2025/10)" },
-            "campaign_26new_year": { "title": "馬年新春 VIP 限定抽獎徽章", "desc": "直播間留下「馬吸騷油」抽取 66 位幸運兒獲得 (2026/2/17 - 2/23)" },
-            "campaign_2601_vip_event_1": { "title": "VIP 線下同樂會紀念徽章", "desc": "麻將大賽冠軍 (2026/1/31)" },
-            "campaign_2601_vip_event_2": { "title": "VIP 線下同樂會紀念徽章", "desc": "麻將大賽亞軍 (2026/1/31)" },
-            "campaign_2601_vip_event": { "title": "VIP 線下同樂會紀念徽章", "desc": "VIP Level.1 以上參加線下活動獲得 (2026/1/24)" },
-            "campaign_2511_vip_event": { "title": "VIP 線下同樂會紀念徽章", "desc": "VIP Level.3 以上參加線下活動獲得 (2025/11/30)" },
-            "campaign_2509_vip_event": { "title": "VIP 線下同樂會紀念徽章", "desc": "VIP Level.3 以上參加線下活動獲得 (2025/9/27)" },
-            "campaign_game_king": { "title": "初夏月挑戰活動", "desc": "下注直播間遊戲達 50000 鑽 (2025/5/5 - 31)" },
-            "campaign_snake_vip_pay": { "title": "金蛇迎新春活動", "desc": "購買任一 VIP 鑽石方案 5 次 (2025/1/4 - 31)" },
-            "campaign_snake_vip_gift": { "title": "金蛇迎新春活動", "desc": "直播間送 VIP 專屬禮物達 60000 鑽 (2025/1/4 - 31)" },
-            "campaign_snake_day": { "title": "金蛇迎新春活動", "desc": "領取每日登入獎勵 26 次 (2025/1/4 - 31)" },
-            "campaign_snake_pay": { "title": "金蛇迎新春活動", "desc": "購買任一鑽石方案 15 次 (2025/1/4 - 31)" },
-            "campaign_snake_gift": { "title": "金蛇迎新春活動", "desc": "直播間送禮達 30000 鑽 (2025/1/4 - 31)" },
-            "campaign_1111_day": { "title": "雙 11 狂歡月活動", "desc": "領取每日登入獎勵 23 次 (2024/11/6 - 30)" },
-            "campaign_1111_buy": { "title": "雙 11 狂歡月活動", "desc": "購買任一鑽石方案 15 次 (2024/11/6 - 30)" },
-            "campaign_1111_live": { "title": "雙 11 狂歡月活動", "desc": "觀看付費直播 150 分鐘 (2024/11/6 - 30)" },
-            "campaign_1111_gift": { "title": "雙 11 狂歡月活動", "desc": "直播間送禮達 30000 鑽 (2024/11/6 - 30)" },
-            "campaign_moon_dayily": { "title": "滿月大挑戰活動", "desc": "領取每日登入獎勵 28 次 (2024/9/1 - 30)" },
-            "campaign_moon_buy": { "title": "滿月大挑戰活動", "desc": "購買任一鑽石方案 15 次 (2024/9/1 - 30)" },
-            "campaign_moon_stream": { "title": "滿月大挑戰活動", "desc": "觀看付費直播 150 分鐘 (2024/9/1 - 30)" },
-            "campaign_moon_gift": { "title": "滿月大挑戰活動", "desc": "直播間送禮達 30000 鑽 (2024/9/1 - 30)" },
-            "campaign_hotfire_dailylogin": { "title": "盛夏狂熱祭活動", "desc": "領取每日登入獎勵 30 次 (2024/7/1 - 31)" },
-            "campaign_hotfire_pack": { "title": "盛夏狂熱祭活動", "desc": "購買任一鑽石方案 15 次 (2024/7/1 - 31)" },
-            "campaign_hotfire_livestream": { "title": "盛夏狂熱祭活動", "desc": "觀看付費直播 150 分鐘 (2024/7/1 - 31)" },
-            "campaign_hotfire_unlockvideo": { "title": "盛夏狂熱祭活動", "desc": "解鎖影片達 30000 鑽 (2024/7/1 - 31)" },
-            "campaign_2406_pwa_active": { "title": "特殊活躍徽章", "desc": "於 PWA 領取登入獎勵 7 次 (2024/6/24 - 7/21)" },
-            "campaign_king_daily": { "title": "王者之路活動", "desc": "領取每日登入獎勵 30 次 (2024/5/1 - 31)" },
-            "campaign_king_pay": { "title": "王者之路活動", "desc": "購買任一鑽石方案 10 次 (2024/5/1 - 31)" },
-            "campaign_king_stream": { "title": "王者之路活動", "desc": "觀看付費直播 150 分鐘 (2024/5/1 - 31)" },
-            "campaign_king_gift": { "title": "王者之路活動", "desc": "直播間送禮達 40000 鑽 (2024/5/1 - 31)" },
-            "campaign_flower_tier3": { "title": "春回大地賞花季活動", "desc": "每日任務累計總花朵數達 2,800 以上 (2024/4/8 - 28)" },
-            "campaign_flower_tier2": { "title": "春回大地賞花季活動", "desc": "每日任務累計總花朵數達 2,200 以上 (2024/4/8 - 28)" },
-            "campaign_flower_tier1": { "title": "春回大地賞花季活動", "desc": "每日任務累計總花朵數達 1,600 以上 (2024/4/8 - 28)" },
-            "campaign_pro_nu": { "title": "新手任務完成全部七項", "desc": "新手任務完成全部七項" },
-            "campaign_chocolate_tier3": { "title": "濃情白色情人節活動", "desc": "每日任務累計總巧克力數達 2,700 以上 (2024/3/11 - 31)" },
-            "campaign_chocolate_tier2": { "title": "濃情白色情人節活動", "desc": "每日任務累計總巧克力數達 2,100 以上 (2024/3/11 - 31)" },
-            "campaign_chocolate_tier1": { "title": "濃情白色情人節活動", "desc": "每日任務累計總巧克力數達 1,600 以上 (2024/3/11 - 31)" },
-            "campaign_2024_dragon_tier3": { "title": "龍來拿紅包活動", "desc": "每日任務累計總紅包數達 2,500 以上 (2024/2/5 - 25)" },
-            "campaign_2024_dragon_tier2": { "title": "龍來拿紅包活動", "desc": "每日任務累計總紅包數達 2,000 以上 (2024/2/5 - 25)" },
-            "campaign_2024_dragon_tier1": { "title": "龍來拿紅包活動", "desc": "每日任務累計總紅包數達 1,500 以上 (2024/2/5 - 25)" },
-            "campaign_firework_tier3": { "title": "迎新煙火祭活動", "desc": "每日任務累計總煙火數達 3,000 以上 (2024/1/8 - 28)" },
-            "campaign_firework_tier2": { "title": "迎新煙火祭活動", "desc": "每日任務累計總煙火數達 2,300 以上 (2024/1/8 - 28)" },
-            "campaign_firework_tier1": { "title": "迎新煙火祭活動", "desc": "每日任務累計總煙火數達 1,800 以上 (2024/1/8 - 28)" },
-            "campaign_23_recap_live_tier3": { "title": "2023 年度成就", "desc": "私密直播觀看達 5,000 分鐘" },
-            "campaign_23_recap_live_tier2": { "title": "2023 年度成就", "desc": "私密直播觀看達 4,000 分鐘" },
-            "campaign_23_recap_live_tier1": { "title": "2023 年度成就", "desc": "私密直播觀看達 3,000 分鐘" },
-            "campaign_23_recap_showticket_tier3": { "title": "2023 年度成就", "desc": "購買表演票券達 3,000 張" },
-            "campaign_23_recap_showticket_tier2": { "title": "2023 年度成就", "desc": "購買表演票券達 2,000 張" },
-            "campaign_23_recap_showticket_tier1": { "title": "2023 年度成就", "desc": "購買表演票券達 1,000 張" },
-            "campaign_23_recap_remote_tier3": { "title": "2023 年度成就", "desc": "遙控玩具操作次數達 3,000 次" },
-            "campaign_23_recap_remote_tier2": { "title": "2023 年度成就", "desc": "遙控玩具操作次數達 2,000 次" },
-            "campaign_23_recap_remote_tier1": { "title": "2023 年度成就", "desc": "遙控玩具操作次數達 1,000 次" },
-            "campaign_23_recap_follow_tier3": { "title": "2023 年度成就", "desc": "追蹤創作者數量超過 1,000 人以上" },
-            "campaign_23_recap_follow_tier2": { "title": "2023 年度成就", "desc": "追蹤創作者數量超過 600 人以上" },
-            "campaign_23_recap_follow_tier1": { "title": "2023 年度成就", "desc": "追蹤創作者數量超過 300 人以上" },
-            "campaign_2023_xmas_tier4": { "title": "聖誕週活動", "desc": "用戶總鑽石排行榜 No.1 (2023/12/25 - 31)" },
-            "campaign_2023_xmas_tier3": { "title": "聖誕週活動", "desc": "用戶總鑽石排行榜 No.2 (2023/12/25 - 31)" },
-            "campaign_2023_xmas_tier2": { "title": "聖誕週活動", "desc": "用戶總鑽石排行榜 No.3 (2023/12/25 - 31)" },
-            "campaign_2023_xmas_tier1": { "title": "聖誕週活動", "desc": "用戶總鑽石排行榜 No.4 - 10 (2023/12/25 - 31)" },
-            "campaign_black_friday_tier4": { "title": "黑五遊樂園活動", "desc": "送遊樂園系列禮物總鑽石排行 No.1 (2023/11/24 - 30)" },
-            "campaign_black_friday_tier3": { "title": "黑五遊樂園活動", "desc": "送遊樂園系列禮物總鑽石排行 No.2 (2023/11/24 - 30)" }
+            "campaign_battlepass_badge": { 
+                "zh-hant": { title: "Battle Pass 滿等榮耀", desc: "於賽季達到滿等徽章，如第一賽季滿等則獲得 S1 徽章" },
+                "en": { title: "Battle Pass Glory", desc: "Reached max level in Battle Pass" }
+            },
+            "campaign_26new_year": { 
+                "zh-hant": { title: "馬吸騷油", desc: "馬年新春 VIP 限定抽獎徽章 (2026/2)" },
+                "en": { title: "Horse New Year", desc: "Special lucky draw winner badge (Feb 2026)" }
+            },
+            "campaign_2601_vip_event_1": { 
+                "zh-hant": { title: "雀神 - 1 月 VIP 同樂會麻將大賽冠軍", desc: "1 月 VIP 線下同樂會紀念徽章 (2026/1/31)" },
+                "en": { title: "Mahjong God - Jan Champion", desc: "Jan VIP Offline Meetup Mahjong Champion" }
+            },
+            "campaign_2601_vip_event_2": { 
+                "zh-hant": { title: "雀聖 - 1 月 VIP 同樂會麻將大賽亞軍", desc: "1 月 VIP 線下同樂會紀念徽章 (2026/1/31)" },
+                "en": { title: "Mahjong Saint - Jan Runner-up", desc: "Jan VIP Offline Meetup Mahjong Runner-up" }
+            },
+            "campaign_2601_vip_event": { 
+                "zh-hant": { title: "1 月同樂會榮耀徽章", desc: "VIP Level.1 以上參加線下活動獲得 (2026/1/24)" },
+                "en": { title: "Jan Meetup Glory", desc: "Obtained from participating in Jan Offline Meetup" }
+            },
+            "campaign_2511_vip_event": { 
+                "zh-hant": { title: "11 月同樂會榮耀徽章", desc: "VIP Level.3 以上參加線下活動獲得 (2025/11/30)" },
+                "en": { title: "Nov Meetup Glory", desc: "Obtained from participating in Nov Offline Meetup" }
+            },
+            "campaign_2509_vip_event": { 
+                "zh-hant": { title: "9 月同樂會榮耀徽章", desc: "VIP Level.3 以上參加線下活動獲得 (2025/9/27)" },
+                "en": { title: "Sep Meetup Glory", desc: "Obtained from participating in Sep Offline Meetup" }
+            },
+            "campaign_game_king": { 
+                "zh-hant": { title: "博弈遊戲王", desc: "初夏月挑戰活動：下注達 50000 鑽 (2025/5)" },
+                "en": { title: "Game King", desc: "Summer Challenge: Wager 50k diamonds" }
+            },
+            "campaign_snake_vip_pay": { 
+                "zh-hant": { title: "2025 金蛇 VIP 購物王", desc: "金蛇迎新春：購買 VIP 鑽石方案 5 次 (2025/1)" },
+                "en": { title: "2025 Snake VIP Shop King", desc: "Purchase VIP diamond packs 5 times" }
+            },
+            "campaign_snake_vip_gift": { 
+                "zh-hant": { title: "2025 金蛇 VIP 贈禮王", desc: "金蛇迎新春：送禮達 60000 鑽 (2025/1)" },
+                "en": { title: "2025 Snake VIP Gift King", desc: "Send VIP gifts worth 60k diamonds" }
+            },
+            "campaign_snake_day": { 
+                "zh-hant": { title: "2025 金蛇登入王", desc: "金蛇迎新春：每日登入 26 次 (2025/1)" },
+                "en": { title: "2025 Snake Login King", desc: "Daily login rewards 26 times" }
+            },
+            "campaign_snake_pay": { 
+                "zh-hant": { title: "2025 金蛇購物王", desc: "金蛇迎新春：購買方案 15 次 (2025/1)" },
+                "en": { title: "2025 Snake Shop King", desc: "Purchase diamond packs 15 times" }
+            },
+            "campaign_snake_gift": { 
+                "zh-hant": { title: "2025 金蛇贈禮王", desc: "金蛇迎新春：送禮達 30000 鑽 (2025/1)" },
+                "en": { title: "2025 Snake Gift King", desc: "Send gifts worth 30k diamonds" }
+            },
+            "campaign_1111_day": { 
+                "zh-hant": { title: "雙 11 登入王", desc: "雙 11 狂歡月：每日登入 23 次 (2024/11)" },
+                "en": { title: "Double 11 Login King", desc: "Daily login rewards 23 times" }
+            },
+            "campaign_1111_buy": { 
+                "zh-hant": { title: "雙 11 購物王", desc: "雙 11 狂歡月：購買方案 15 次 (2024/11)" },
+                "en": { title: "Double 11 Shop King", desc: "Purchase packs 15 times" }
+            },
+            "campaign_1111_live": { 
+                "zh-hant": { title: "雙 11 觀賞王", desc: "雙 11 狂歡月：付費觀看 150 分鐘 (2024/11)" },
+                "en": { title: "Double 11 Watch King", desc: "Watch premium streams 150 mins" }
+            },
+            "campaign_1111_gift": { 
+                "zh-hant": { title: "雙 11 贈禮王", desc: "雙 11 狂歡月：送禮 30000 鑽 (2024/11)" },
+                "en": { title: "Double 11 Gift King", desc: "Send gifts worth 30k diamonds" }
+            },
+            "campaign_moon_dayily": { 
+                "zh-hant": { title: "月光守護者", desc: "滿月大挑戰：登入 28 次 (2024/9)" },
+                "en": { title: "Moon Guardian", desc: "Claim login rewards 28 times" }
+            },
+            "campaign_moon_buy": { 
+                "zh-hant": { title: "月光奢華者", desc: "滿月大挑戰：購買 15 次方案 (2024/9)" },
+                "en": { title: "Moon Splendor", desc: "Purchase diamond packs 15 times" }
+            },
+            "campaign_moon_stream": { 
+                "zh-hant": { title: "月光見證者", desc: "滿月大挑戰：觀看 150 分鐘 (2024/9)" },
+                "en": { title: "Moon Witness", desc: "Watch premium streams 150 mins" }
+            },
+            "campaign_moon_gift": { 
+                "zh-hant": { title: "月光奉獻者", desc: "滿月大挑戰：送禮 30000 鑽 (2024/9)" },
+                "en": { title: "Moon Devotee", desc: "Send gifts worth 30k diamonds" }
+            },
+            "campaign_hotfire_dailylogin": { 
+                "zh-hant": { title: "狂熱每日登入王", desc: "盛夏狂熱祭：登入 30 次 (2024/7)" },
+                "en": { title: "Hotfire Login King", desc: "Daily login rewards 30 times" }
+            },
+            "campaign_hotfire_pack": { 
+                "zh-hant": { title: "狂熱禮包購買王", desc: "盛夏狂熱祭：購買 15 次方案 (2024/7)" },
+                "en": { title: "Hotfire Pack King", desc: "Purchase packs 15 times" }
+            },
+            "campaign_hotfire_livestream": { 
+                "zh-hant": { title: "狂熱直播觀賞王", desc: "盛夏狂熱祭：觀看 150 分鐘 (2024/7)" },
+                "en": { title: "Hotfire Stream King", desc: "Watch premium streams 150 mins" }
+            },
+            "campaign_hotfire_unlockvideo": { 
+                "zh-hant": { title: "狂熱影片解鎖王", desc: "盛夏狂熱祭：影片達 30000 鑽 (2024/7)" },
+                "en": { title: "Hotfire Video King", desc: "Unlock videos worth 30k diamonds" }
+            },
+            "campaign_2406_pwa_active": { 
+                "zh-hant": { title: "特殊活躍徽章", desc: "PWA 領取登入獎勵 7 次 (2024/6)" },
+                "en": { title: "PWA Active Badge", desc: "Claim login via PWA 7 times" }
+            },
+            "campaign_king_daily": { 
+                "zh-hant": { title: "全勤王者：2024 五月", desc: "王者之路：登入 30 次" },
+                "en": { title: "Attendance King: May 24", desc: "Daily login rewards 30 times" }
+            },
+            "campaign_king_pay": { 
+                "zh-hant": { title: "財富王者：2024 五月", desc: "王者之路：購買方案 10 次" },
+                "en": { title: "Wealth King: May 24", desc: "Purchase diamond packs 10 times" }
+            },
+            "campaign_king_stream": { 
+                "zh-hant": { title: "觀眾王者：2024 五月", desc: "王者之路：觀看 150 分鐘" },
+                "en": { title: "Viewer King: May 24", desc: "Watch streams 150 mins" }
+            },
+            "campaign_king_gift": { 
+                "zh-hant": { title: "抖內王者：2024 五月", desc: "王者之路：送禮 40000 鑽" },
+                "en": { title: "Donor King: May 24", desc: "Send 40k gifts" }
+            },
+            "campaign_flower_tier3": { 
+                "zh-hant": { title: "菁英護花使者", desc: "賞花季：總花朵數達 2,800+" },
+                "en": { title: "Elite Flower Guard", desc: "2,800+ Flowers collected" }
+            },
+            "campaign_flower_tier2": { 
+                "zh-hant": { title: "高階護花使者", desc: "賞花季：總花朵數達 2,200+" },
+                "en": { title: "High Flower Guard", desc: "2,200+ Flowers collected" }
+            },
+            "campaign_flower_tier1": { 
+                "zh-hant": { title: "中階護花使者", desc: "賞花季：總花朵數達 1,600+" },
+                "en": { title: "Mid Flower Guard", desc: "1,600+ Flowers collected" }
+            },
+            "campaign_pro_nu": { 
+                "zh-hant": { title: "新手專精徽章", desc: "恭喜完成新手訓練營全任務" },
+                "en": { title: "Newbie Specialist", desc: "Completed all newbie quests" }
+            },
+            "campaign_chocolate_tier3": { 
+                "zh-hant": { title: "尊榮巧克力皇族", desc: "白色情人節：總數 2,700+" },
+                "en": { title: "Noble Choco Royal", desc: "2,700+ Chocolates collected" }
+            },
+            "campaign_chocolate_tier2": { 
+                "zh-hant": { title: "高貴巧克力公爵", desc: "白色情人節：總數 2,100+" },
+                "en": { title: "Fine Choco Duke", desc: "2,100+ Chocolates collected" }
+            },
+            "campaign_chocolate_tier1": { 
+                "zh-hant": { title: "優雅巧克力紳士", desc: "白色情人節：總數 1,600+" },
+                "en": { title: "Elegant Choco Gent", desc: "1,600+ Chocolates collected" }
+            },
+            "campaign_2024_dragon_tier3": { 
+                "zh-hant": { title: "2024 黃金龍年徽章", desc: "龍年紅包：總數 2,500+" },
+                "en": { title: "2024 Golden Dragon", desc: "2,500+ Red Envelopes" }
+            },
+            "campaign_2024_dragon_tier2": { 
+                "zh-hant": { title: "2024 白金龍年徽章", desc: "龍年紅包：總數 2,000+" },
+                "en": { title: "2024 Platinum Dragon", desc: "2,000+ Red Envelopes" }
+            },
+            "campaign_2024_dragon_tier1": { 
+                "zh-hant": { title: "2024 紀念龍年徽章", desc: "龍年紅包：總數 1,500+" },
+                "en": { title: "2024 Dragon Memory", desc: "1,500+ Red Envelopes" }
+            },
+            "campaign_firework_tier3": { 
+                "zh-hant": { title: "浩瀚星空煙火", desc: "迎新煙火：總數 3,000+" },
+                "en": { title: "Galactic Fireworks", desc: "3,000+ Fireworks" }
+            },
+            "campaign_firework_tier2": { 
+                "zh-hant": { title: "璀璨煙火", desc: "迎新煙火：總數 2,300+" },
+                "en": { title: "Dazzling Fireworks", desc: "2,300+ Fireworks" }
+            },
+            "campaign_firework_tier1": { 
+                "zh-hant": { title: "煙火紀念", desc: "迎新煙火：總數 1,800+" },
+                "en": { title: "Firework Memory", desc: "1,800+ Fireworks" }
+            },
+            "campaign_23_recap_live_tier3": { 
+                "zh-hant": { title: "2023 宇宙凝望者", desc: "成就：觀看直播達 5,000 分鐘" },
+                "en": { title: "2023 Cosmic Gazer", desc: "Watch 5,000 mins of private live" }
+            },
+            "campaign_23_recap_showticket_tier3": { 
+                "zh-hant": { title: "2023 華麗舞台贊助者", desc: "成就：購買表演票券 3,000 張" },
+                "en": { title: "2023 Stage Patron", desc: "Buy 3,000 show tickets" }
+            },
+            "campaign_23_recap_remote_tier3": { 
+                "zh-hant": { title: "2023 奇幻操縱者", desc: "成就：遙控玩具操作 3,000 次" },
+                "en": { title: "2023 Magic Controller", desc: "Use remote toys 3,000 times" }
+            },
+            "campaign_23_recap_follow_tier3": { 
+                "zh-hant": { title: "2023 耀眼崇拜者", desc: "成就：追蹤超過 1,000 人" },
+                "en": { title: "2023 Shining Admirer", desc: "Follow 1,000+ creators" }
+            },
+            "campaign_2023_xmas_tier4": { 
+                "zh-hant": { title: "2023 鑽石聖誕樹", desc: "排行：聖誕週排行 No.1" },
+                "en": { title: "2023 Diamond Xmas Tree", desc: "Rank No.1 in Xmas Week" }
+            },
+            "campaign_black_friday_tier4": { 
+                "zh-hant": { title: "夢幻王者", desc: "排行：黑五禮物排行 No.1" },
+                "en": { title: "Fantasy King", desc: "Rank No.1 in Black Friday" }
+            },
+            "campaign_katohtaka_tier4": { 
+                "zh-hant": { title: "性愛帝王", desc: "排行：金手指排行 No.1" },
+                "en": { title: "Sexual Emperor", desc: "Rank No.1 in Katoh Taka" }
+            },
+            "campaign_s_club": { 
+                "zh-hant": { title: "S Club", desc: "特殊徽章：S Club 獲邀會員" },
+                "en": { title: "S Club", desc: "Special Invitation Member" }
+            }
         };
 
         const CFG = {
@@ -299,24 +446,36 @@
 
         const I18N = {
             'zh-hant': { 
-                title:"我的榮耀徽章全覽", username: "帳號：", total:"徽章總數", my_lvl:"我的 VIP 等級：", btn:"確認上架", upgrade: "立即升級", feat_h:"帳號徽章更換", vip_pre: "等級至", vip_suf: "可解鎖徽章更換", lock:"未達標", ok:"符合資格", hint_sel:"請選取下方想更換徽章", hint_ready:"已選取", hint_pos:"將替換左側徽章，上架之徽章呈現於右側", equipped: "帳號顯示徽章", empty: "暫無可選徽章", login: "請登入後查看徽章", success: "✅ 送出成功", cooldown: "⏳ 請等待至少 20 秒再送出請求", modal_btn: "確定", all_title: "全站歷史徽章庫", got_it: "已獲得", sending: "處理中...", all_lib: "全站歷史收藏", view_lib: "點擊查看圖鑑", zero_msg: "您目前尚未擁有任何直播間徽章",
+                title:"我的榮耀徽章全覽", username: "帳號：", total:"徽章總數", realtime:"帳號即時資產", my_lvl:"我的 VIP 等級：", btn:"確認上架", upgrade: "立即升級", feat_h:"帳號徽章更換", vip_pre: "等級至", vip_suf: "可解鎖徽章更換", lock:"未達標", ok:"符合資格", hint_sel:"請選取下方想更換徽章", hint_ready:"已選取", hint_pos:"將替換左側徽章，上架之徽章呈現於右側", equipped: "帳號顯示徽章", empty: "暫無可選徽章", login: "請登入後查看徽章", success: "✅ 送出成功", cooldown: "⏳ 請等待至少 20 秒再送出請求", modal_btn: "確定", all_title: "全站歷史徽章庫", got_it: "已獲得", sending: "處理中...", all_lib: "全站歷史收藏", view_lib: "點擊查看圖鑑", zero_msg: "您目前尚未擁有任何直播間徽章",
                 n1:"本頁面呈現您的帳號所有徽章", n2:"帳號等級達到 VIP Level 60 可解鎖徽章更換", n3:"每次更換需等約 20 秒，請勿頻繁送出需求", n4:"徽章更換完成，可至直播間查看", n5:"徽章與等級需登入後完整顯示", n6:"資料至少需 10 分鐘更新時間", n7:"【重要】為了保護您的帳號，切勿將徽章介面分享給他人，以免造成帳號冒用或徽章損失。"
             },
-            'en': { title:"Badge Gallery", username: "Account: ", total:"Total", my_lvl:"My VIP Level: ", btn:"Confirm", upgrade: "Upgrade", feat_h:"Badge Swap", vip_pre: "Reach", vip_suf: "to unlock swap", lock:"Ineligible", ok:"Qualified", hint_sel:"Select a badge below", hint_ready:"Selected", hint_pos:"New one shows on right", equipped: "Display Badges", empty: "No badges", login: "Please login", success: "✅ Success", cooldown: "⏳ Wait 20s", modal_btn: "OK", all_title: "Historical Badges", got_it: "Owned", all_lib: "Library", view_lib: "View Catalog", zero_msg: "No badges found" }
+            'en': { 
+                title:"Glory Badge Gallery", username: "Account: ", total:"Total Badges", realtime:"Live Assets", my_lvl:"My VIP Level: ", btn:"Confirm", upgrade: "Upgrade", feat_h:"Badge Swap", vip_pre: "Reach", vip_suf: "to unlock swap", lock:"Ineligible", ok:"Qualified", hint_sel:"Select a badge below", hint_ready:"Selected", hint_pos:"New one shows on right", equipped: "Display Badges", empty: "No badges", login: "Please login", success: "✅ Success", cooldown: "⏳ Wait 20s", modal_btn: "OK", all_title: "Historical Badges", got_it: "Owned", all_lib: "Badge Database", view_lib: "View Collection", zero_msg: "No badges found",
+                n1:"This page shows all your account badges", n2:"Reach VIP Level 60 to unlock badge swap", n3:"Wait 20s between requests. Do not spam.", n4:"Check live rooms after completion.", n5:"Login required for full display", n6:"Allow 10 mins for data updates", n7:"[Important] Do not share this interface with others to avoid misuse."
+            }
         };
 
         let state = { lang:'zh-hant', level:0, selected:null, list:[], ownedIds: [], isSubmitting: false };
+        
         const getCleanUserId = () => {
             const getFromUrl = (url) => { if (!url) return null; const decoded = decodeURIComponent(url); const match = decoded.match(/[?&](user_id|uid|userId)=([a-zA-Z0-9]{24,48})/i); return match ? match[2] : null; };
             let rawId = getFromUrl(window.location.href) || getFromUrl(document.referrer);
             if (!rawId) { const params = new URLSearchParams(window.location.search); const sourceParam = params.get('source'); if (sourceParam) rawId = getFromUrl(sourceParam); }
-            return rawId && rawId.length >= 48 ? rawId.substring(12, rawId.length - 12) : rawId;
+            if (!rawId) return null;
+            if (rawId.length >= 48) return rawId.substring(12, rawId.length - 12);
+            return rawId;
         };
         const uid = getCleanUserId();
 
         function showModal(msg) { document.getElementById('modal-msg').innerText = msg; document.getElementById('custom-modal').classList.add('show'); }
         function closeModal() { document.getElementById('custom-modal').classList.remove('show'); }
-        function setLang(l) { state.lang = l; document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.id === `btn-${l}`)); updateUIStrings(); if(uid) init(); }
+
+        function setLang(l) {
+            state.lang = l;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.id === `btn-${l}`));
+            updateUIStrings();
+            if(uid) init();
+        }
 
         function updateUIStrings() {
             const t = I18N[state.lang];
@@ -324,9 +483,11 @@
             document.getElementById('lbl-my-lvl').innerText = t.my_lvl;
             document.getElementById('ui-upgrade').innerText = t.upgrade;
             document.getElementById('lbl-total').innerText = t.total;
+            document.getElementById('lbl-realtime').innerText = t.realtime;
             document.getElementById('lbl-site-lib').innerText = t.all_lib;
             document.getElementById('lbl-view-lib').innerText = t.view_lib;
             document.getElementById('ui-title').innerText = t.title;
+            document.getElementById('ui-all-title').innerText = t.all_title;
             document.getElementById('ui-hint-pos').innerText = t.hint_pos;
             document.getElementById('ui-zero-cta').innerText = t.all_title;
             for(let i=1; i<=7; i++) { const el = document.getElementById(`ui-n${i}`); if(el) el.innerText = t[`n${i}`]; }
@@ -346,11 +507,11 @@
                 document.getElementById('ui-level').innerText = r.level;
                 document.getElementById('ui-username-display').innerText = I18N[state.lang].username + (r.username || "---");
 
-                if (r.count === 0) { hero.style.display = 'block'; box.style.display = 'none'; }
-                else { hero.style.display = 'none'; box.style.display = 'grid'; }
-
                 const rawIds = (r.badges || []).filter(i => i.startsWith('campaign_'));
                 state.ownedIds = rawIds;
+
+                if (r.count === 0) { hero.style.display = 'block'; box.style.display = 'none'; document.getElementById('ui-all-btn').classList.add('highlight'); }
+                else { hero.style.display = 'none'; box.style.display = 'grid'; document.getElementById('ui-all-btn').classList.remove('highlight'); }
 
                 if(!isRefreshOnly || state.list.length === 0) {
                     state.list = await Promise.all(rawIds.map(async id => {
@@ -385,11 +546,13 @@
                 overlay.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
                 const list = document.getElementById('all-badges-list');
-                list.innerHTML = Object.entries(GLOBAL_BADGE_DB).map(([id, info]) => {
+                const t = I18N[state.lang];
+                list.innerHTML = Object.entries(GLOBAL_BADGE_DB).map(([id, langData]) => {
+                    const info = langData[state.lang] || langData['zh-hant'];
                     const owned = state.ownedIds.includes(id);
                     return `
                         <div class="lib-card ${owned?'owned':''}">
-                            ${owned?`<div class="owned-tag">${I18N[state.lang].got_it} ✓</div>`:''}
+                            ${owned?`<div class="owned-tag">${t.got_it} ✓</div>`:''}
                             <img class="lib-img" src="${CFG.img}${id}.svg">
                             <div class="lib-info">
                                 <span class="lib-name">${info.title}</span>
