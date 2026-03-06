@@ -160,6 +160,8 @@
         .modal-text { font-size: 17px; font-weight: 600; line-height: 1.6; margin-bottom: 25px; color: #fff; }
         .modal-btn { background: var(--gold); color: #000; border: none; padding: 12px 0; width: 100%; border-radius: 12px; font-weight: 800; font-size: 16px; cursor: pointer; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .skeleton { background: linear-gradient(90deg, #0a0c10 25%, #1a1c22 50%, #0a0c10 75%); background-size: 200% 100%; animation: load 1.5s infinite linear; border-radius: 20px; }
+        @keyframes load { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
     </style>
 </head>
 <body>
@@ -228,7 +230,7 @@
     <script>
         // --- 1. 嚴格鎖定：全站徽章資料庫 ---
         const GLOBAL_BADGE_DB = {
-    "campaign_battlepass_s5": { 
+    "campaign_battlepass_s1": { 
         "zh-hant": { title: "Battle Pass 滿等榮耀", sub: "Battle Pass 賽季滿等", desc: "於 Battle Pass 賽季達到滿等，依照完成賽季給予徽章" },
         "en": { title: "Battle Pass Glory", sub: "Battle Pass Achievement", desc: "Reached max level in Battle Pass" }
     },
@@ -681,8 +683,8 @@ function updateUIStrings() {
                 if (Date.now() - startTime < 5000) await new Promise(r => setTimeout(r, 5000 - (Date.now() - startTime)));
                 if (res.ok) { showModal(t.success); state.selected = null; setTimeout(() => init(true), 1000); }
                 else if (res.status === 429) showModal(t.cooldown);
-                else showModal(`❌: Error`);
-            } catch { showModal("Network Error"); } finally { state.isSubmitting = false; render(); check(); }
+                else showModal(`❌: ${d.error || "Denied"}`);
+            } catch (err) { showModal("❌ 伺服器連線失敗 (Network Error)"); } finally { state.isSubmitting = false; render(); check(); }
         }
 
         // 修改：動態計算資料庫內所有的徽章數量，並寫入到畫面上
