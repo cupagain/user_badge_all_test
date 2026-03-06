@@ -162,7 +162,7 @@
         .overlay-header { padding: 30px 20px; text-align: center; border-bottom: 1px solid var(--glass-border); position: relative; }
         .overlay-title { font-family: var(--font-head); font-size: 22px; font-weight: 900; color: #fff; }
         .close-overlay { position: absolute; right: 20px; top: 30px; font-size: 30px; color: #fff; cursor: pointer; border: none; background: none; }
-        .overlay-scroll { flex: 1; overflow-y: auto; padding: 20px; }
+        .overlay-scroll { flex: 1; overflow-y: auto; padding: 20px 20px 80px; position: relative; }
         .lib-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
         @media (min-width: 600px) { .lib-grid { grid-template-columns: 1fr 1fr; } }
         .lib-card { background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 24px; padding: 20px; display: flex; align-items: center; gap: 15px; position: relative; transition: 0.3s; }
@@ -615,7 +615,7 @@
             if (vipSuf) vipSuf.innerText = t.vip_suf;
 
             const zeroMsg = document.getElementById('ui-zero-msg');
-            if (zeroMsg) zeroMsg.innerText = t.zeroMsg;
+            if (zeroMsg) zeroMsg.innerText = t.zero_msg; // <--- 改成下底線 zero_msg，對齊 I18N 字典
 
             for(let i=1; i<=7; i++) { 
                 const el = document.getElementById(`ui-n${i}`);
@@ -624,31 +624,42 @@
             document.getElementById('ui-modal-btn').innerText = t.modal_btn;
         }
 
-        async function init(isRefreshOnly = false) {
+async function init(isRefreshOnly = false) {
             const box = document.getElementById('display');
             const equippedGrid = document.getElementById('equipped-display-grid');
             const hero = document.getElementById('zero-badge-hero');
-            if(!uid) { box.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:100px;color:#444">Please Login</div>`; return; }
+            if(!uid) { box.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:100px;color:#444">${I18N[state.lang].login}</div>`; return; }
             if(!isRefreshOnly) box.innerHTML = Array(4).fill(0).map(()=>`<div class="badge-item"><div class="badge-img skeleton"></div><div class="skeleton" style="height:14px;width:60%"></div></div>`).join('');
+            
             try {
                 const r = await fetch(`${CFG.data}?user_id=${uid}`).then(res => res.json());
-                state.level = r.level;
-                document.getElementById('ui-count').innerText = r.count;
-                document.getElementById('ui-level').innerText = r.level;
+                state.level = r.level || 0;
+                document.getElementById('ui-count').innerText = r.count || 0;
+                document.getElementById('ui-level').innerText = r.level || 0;
                 document.getElementById('ui-username-display').innerText = I18N[state.lang].username + (r.username || "---");
 
                 const rawIds = (r.badges || []).filter(i => i.startsWith('campaign_'));
                 state.ownedIds = rawIds;
 
-                if (r.count === 0) { hero.style.display = 'block'; box.style.display = 'none'; document.getElementById('ui-all-btn').classList.add('highlight'); }
-                else { hero.style.display = 'none'; box.style.display = 'grid'; document.getElementById('ui-all-btn').classList.remove('highlight'); }
+                if ((r.count || 0) === 0) { 
+                    hero.style.display = 'block'; 
+                    box.style.display = 'none'; 
+                    document.getElementById('ui-all-btn').classList.add('highlight'); 
+                } else { 
+                    hero.style.display = 'none'; 
+                    box.style.display = 'grid'; 
+                    document.getElementById('ui-all-btn').classList.remove('highlight'); 
+                }
 
                 if(!isRefreshOnly || state.list.length === 0) {
                     state.list = await Promise.all(rawIds.map(async id => {
+                        const k = `badge_${id}`;
                         try {
-                            const t = await fetch(`${CFG.trs}?lang=${state.lang}&key=badge_${id}`).then(res => res.json());
-                            return { id, name: t[`badge_${id}`] || id };
-                        } catch { return { id, name: id }; }
+                            const res = await fetch(`${CFG.trs}?lang=${state.lang}&key=${k}`);
+                            if (!res.ok) throw new Error('API');
+                            const t = await res.json();
+                            return { id, name: t[k] || id };
+                        } catch { return { id, name: id }; } // API 失敗就直接用 ID 當名稱，絕不報錯
                     }));
                 }
 
@@ -656,20 +667,39 @@
                     document.getElementById('equipped-area').style.display = 'block';
                     const lastId = rawIds[rawIds.length - 1];
                     const secondLastId = rawIds.length > 1 ? rawIds[rawIds.length - 2] : null;
+                    
                     const fetchName = async (id) => {
-                        const t = await fetch(`${CFG.trs}?lang=${state.lang}&key=badge_${id}`).then(res => res.json());
-                        return t[`badge_${id}`] || id;
+                        const k = `badge_${id}`;
+                        try {
+                            const res = await fetch(`${CFG.trs}?lang=${state.lang}&key=${k}`);
+                            if (!res.ok) throw new Error('API');
+                            const t = await res.json();
+                            return t[k] || id;
+                        } catch { return id; } // 失敗回傳 ID
                     };
+                    
                     const eqList = [];
                     if (secondLastId) eqList.push({ id: secondLastId, name: await fetchName(secondLastId) });
                     eqList.push({ id: lastId, name: await fetchName(lastId) });
-                    equippedGrid.innerHTML = eqList.map(item => `<div class="equipped-box"><img src="${CFG.img}${item.id}.svg"><span>${item.name}</span></div>`).join('');
+                    
+                    equippedGrid.innerHTML = eqList.map(item => `
+                        <div class="equipped-box">
+                            <img src="${CFG.img}${item.id}.svg" onerror="this.src='${CFG.img}default.svg'">
+                            <span>${item.name}</span>
+                        </div>
+                    `).join('');
+                } else {
+                    document.getElementById('equipped-area').style.display = 'none';
                 }
+                
                 if (state.list.length > 0) render();
                 check();
-            } catch (e) { box.innerHTML = "Error Loading Data"; }
+            } catch (e) { 
+                console.error("Init Error:", e);
+                // 移除會毀掉畫面的 Error Loading Data，改為安靜失敗，讓用戶至少能看圖鑑
+                if(state.list.length === 0) box.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px;color:#64748b;">System Busy. Please try again.</div>`;
+            }
         }
-
         function toggleAllBadges(show) {
             const overlay = document.getElementById('all-badges-overlay');
             if (show) {
@@ -706,6 +736,7 @@
                         </div>
                     `;
                 }).join('');
+                list.innerHTML += `<div style="grid-column:1/-1;text-align:center;padding:40px 0 20px;color:#64748b;font-size:12px;font-weight:600;letter-spacing:1px;">— 已經到底囉 —</div>`;
             } else { overlay.style.display = 'none'; document.body.style.overflow = 'auto'; }
         }
 
