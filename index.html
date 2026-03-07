@@ -35,7 +35,7 @@
         .lang-btn.active { background: #fff; color: #000; border-color: #fff; }
 
         /* 1. 標題與基礎資訊 */
-        .header-area { text-align: center; padding: 70px 20px 15px; }
+        .header-area { text-align: center; padding: 70px 20px 5px; } /* 優化 2：縮減底部 padding */
         @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
         .main-title { 
             font-family: var(--font-head); font-size: 30px; font-weight: 900; letter-spacing: -1px; margin-bottom: 8px;
@@ -45,17 +45,17 @@
         }
         .username-line { font-size: 14px; font-weight: 700; color: var(--gold); margin-bottom: 20px; display: block; opacity: 0.9; }
 
-        /* 極簡化徽章總數 */
+        /* 優化 1 & 2：微幅放大總數，並縮小下方 margin */
         .minimal-total-box {
-            display: inline-flex; align-items: center; gap: 8px;
+            display: inline-flex; align-items: center; gap: 10px;
             border: 1px solid rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.05);
-            padding: 6px 16px; border-radius: 100px; margin-bottom: 25px;
+            padding: 8px 20px; border-radius: 100px; margin-bottom: 15px; 
         }
-        .mt-label { font-size: 12px; font-weight: 600; color: var(--text-dim); }
-        .mt-val { font-family: var(--font-head); font-size: 16px; font-weight: 800; color: var(--ice-blue); }
+        .mt-label { font-size: 13px; font-weight: 600; color: var(--text-dim); }
+        .mt-val { font-family: var(--font-head); font-size: 18px; font-weight: 800; color: var(--ice-blue); }
 
         /* 全站歷史徽章獨立大區塊 */
-        .hero-banner-wrap { max-width: 600px; margin: 0 auto 25px; padding: 0 16px; }
+        .hero-banner-wrap { max-width: 600px; margin: 0 auto 20px; padding: 0 16px; } /* 優化 2：縮小下方 margin */
         .library-hero-card { 
             background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(251, 191, 36, 0.02) 100%); 
             border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 20px;
@@ -68,39 +68,43 @@
         .lh-info { text-align: left; }
         .lh-title { font-size: 16px; font-weight: 800; color: var(--gold); margin-bottom: 4px; display: block; }
         .lh-desc { font-size: 12px; color: #cbd5e1; font-weight: 600; }
-        /* 優化需求 5：增加前後綴文字，讓總數意義明確 */
         .lh-count { font-family: var(--font-head); font-size: 24px; font-weight: 900; color: #fff; display: flex; align-items: baseline; gap: 4px; }
         .lh-count-text { font-size: 12px; font-weight: 600; color: var(--text-dim); font-family: var(--font-body); }
         .lh-arrow { font-size: 14px; color: var(--gold); opacity: 0.8; margin-left: 4px; }
 
-        /* 2. 帳號顯示徽章 (還原大小) */
-        .equipped-section { max-width: 1000px; margin: 0 auto 20px; padding: 0 16px; }
-        .section-title { font-size: 12px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; text-align: center; }
+        /* 優化 4：將顯示徽章與更換規則合併為單一關聯面板 */
+        .management-section { max-width: 600px; margin: 0 auto 20px; padding: 0 16px; }
+        .management-card { 
+            background: var(--glass-deep); border: 1px solid var(--glass-border); border-radius: 28px; 
+            padding: 24px 20px; backdrop-filter: blur(30px); display: flex; flex-direction: column; gap: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: 0.3s;
+        }
+        .management-card.vip-active { border-color: rgba(251, 191, 36, 0.4); }
+        
+        .mc-header { text-align: center; }
+        .mc-title { font-size: 16px; font-weight: 800; color: #fff; letter-spacing: 1px; font-family: var(--font-head); }
+
+        /* 裝備區網格 (維持 75x75 尺寸要求) */
         .equipped-grid { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
         .equipped-box {
-            background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 28px;
-            padding: 25px 10px 10px; display: flex; flex-direction: column; align-items: center; text-align: center;
-            backdrop-filter: blur(10px); width: calc(50% - 7px); max-width: 180px; transition: 0.3s;
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px;
+            padding: 20px 10px 10px; display: flex; flex-direction: column; align-items: center; text-align: center;
+            width: calc(50% - 7px); max-width: 180px; 
         }
         .equipped-box img { width: 75px; height: 75px; margin-bottom: 10px; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.6)); }
         .equipped-box span { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.2; height: 32px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 
-        /* 優化需求 4：權限卡片放大、規則清楚 */
-        .control-section { max-width: 600px; margin: 0 auto 20px; padding: 0 16px; }
-        .auth-card { 
-            background: var(--glass-deep); border: 1px solid var(--glass-border); border-radius: 24px; 
-            padding: 20px 24px; backdrop-filter: blur(30px); display: flex; flex-direction: column; gap: 14px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        }
-        .auth-card.vip-active { border-color: rgba(251, 191, 36, 0.4); }
-        .ac-header { display: flex; flex-direction: column; gap: 6px; border-bottom: 1px solid var(--glass-border); padding-bottom: 14px; }
-        .ac-title { font-family: var(--font-head); font-size: 18px; font-weight: 800; color: #fff; }
-        .ac-rule { font-size: 13.5px; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+        /* 面板分隔線與規則區 */
+        .mc-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--glass-border), transparent); margin: 0 10px; }
+        
+        .mc-vip-area { display: flex; align-items: center; justify-content: space-between; padding: 0 5px; flex-wrap: wrap; gap: 12px; }
+        .vip-rule-group { display: flex; flex-direction: column; gap: 6px; text-align: left; }
+        .ac-rule { font-size: 13px; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; gap: 6px; }
         .lvl-box { border: 1px solid var(--gold); padding: 0 6px; border-radius: 4px; color: var(--gold); font-family: var(--font-head); font-weight: 800; font-size: 12px; }
         
-        .ac-body { display: flex; align-items: center; justify-content: space-between; }
-        .ac-my-lvl { font-size: 16px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px; }
-        .val-lvl-plain { font-family: var(--font-head); font-size: 24px; color: var(--gold); line-height: 1; }
+        .ac-my-lvl { font-size: 14px; font-weight: 700; color: #94a3b8; display: flex; align-items: center; gap: 8px; }
+        .val-lvl-plain { font-family: var(--font-head); font-size: 20px; color: var(--gold); line-height: 1; font-weight: 800; }
+
         .ac-status-area { display: flex; align-items: center; gap: 12px; }
         .val-status { font-size: 14px; font-weight: 800; color: #64748b; }
         .val-status.unlocked { color: var(--gold); }
@@ -111,7 +115,7 @@
             white-space: nowrap;
         }
 
-        /* 4. 徽章更換提示 (還原原文案與排版) */
+        /* 更換提示 */
         .instruction-area { text-align: center; margin-bottom: 15px; min-height: 48px; padding: 0 20px; }
         .hint-label { font-size: 11px; font-weight: 700; color: #94a3b8; display: block; margin-bottom: 4px; text-transform: uppercase; }
         .hint-pos-warn { font-size: 11px; font-weight: 600; color: var(--gold); opacity: 0.8; margin-top: 4px; display: block; margin-bottom: 6px; }
@@ -211,19 +215,21 @@
         </div>
     </div>
 
-    <section class="equipped-section" id="equipped-area" style="display: none;">
-        <p class="section-title" id="lbl-equipped">帳號顯示徽章</p>
-        <div class="equipped-grid" id="equipped-display-grid"></div>
-    </section>
-
-    <section class="control-section">
-        <div class="auth-card" id="status-card">
-            <div class="ac-header">
-                <span class="ac-title" id="ui-feat-h">帳號徽章更換</span>
-                <div class="ac-rule"><span id="ui-vip-pre">等級至</span><span class="lvl-box">VIP Level 60</span><span id="ui-vip-suf">可解鎖徽章更換</span></div>
+    <section class="management-section" id="management-area" style="display: none;">
+        <div class="management-card" id="status-card">
+            <div class="mc-header">
+                <span class="mc-title" id="ui-feat-h">帳號顯示與更換徽章</span>
             </div>
-            <div class="ac-body">
-                <span class="ac-my-lvl"><span id="lbl-my-lvl">我的 VIP 等級：</span> <span class="val-lvl-plain" id="ui-level">--</span></span>
+            
+            <div class="equipped-grid" id="equipped-display-grid"></div>
+            
+            <div class="mc-divider"></div>
+            
+            <div class="mc-vip-area">
+                <div class="vip-rule-group">
+                    <div class="ac-rule"><span id="ui-vip-pre">等級至</span> <span class="lvl-box">VIP Level 60</span> <span id="ui-vip-suf">可解鎖徽章更換</span></div>
+                    <span class="ac-my-lvl"><span id="lbl-my-lvl">我的 VIP 等級：</span> <span class="val-lvl-plain" id="ui-level">--</span></span>
+                </div>
                 <div class="ac-status-area">
                     <span class="val-status" id="ui-auth-status">未達標</span>
                     <a href="https://swag.live/settings/vvip" target="_blank" class="upgrade-cta-inline" id="ui-upgrade">立即升級</a>
@@ -348,12 +354,12 @@
 
         const I18N = {
             'zh-hant': { 
-                title:"我的榮耀徽章全覽", username: "帳號：", total:"帳號徽章總數", my_lvl:"我的 VIP 等級：", btn:"確認上架", upgrade: "立即升級", feat_h:"帳號徽章更換", vip_pre: "等級至", vip_suf: "可解鎖徽章更換", lock:"未達標", ok:"已解鎖", hint_sel:"請選取下方想更換徽章", hint_ready:"已選取", hint_pos:"將替換左側徽章，上架之徽章呈現於右側", equipped: "帳號顯示徽章", empty: "暫無可選徽章", login: "請登入後查看徽章", success: "✅ 送出成功", cooldown: "⏳ 請等待至少 20 秒再送出請求", modal_btn: "確定", all_title: "全站歷史徽章圖鑑", got_it: "已獲得", sending: "處理中...", all_lib: "全站歷史徽章庫", view_lib: "點擊查看所有成就圖鑑", zero_msg: "您目前尚未擁有任何直播間徽章", count_pre: "收錄共", count_suf: "款",
+                title:"我的榮耀徽章全覽", username: "帳號：", total:"帳號徽章總數", my_lvl:"我的 VIP 等級：", btn:"確認上架", upgrade: "立即升級", feat_h:"帳號顯示與更換徽章", vip_pre: "等級至", vip_suf: "可解鎖徽章更換", lock:"未達標", ok:"已解鎖", hint_sel:"請選取下方想更換徽章", hint_ready:"已選取", hint_pos:"將替換左側徽章，上架之徽章呈現於右側", empty: "暫無可選徽章", login: "請登入後查看徽章", success: "✅ 送出成功", cooldown: "⏳ 請等待至少 20 秒再送出請求", modal_btn: "確定", all_title: "全站歷史徽章圖鑑", got_it: "已獲得", sending: "處理中...", all_lib: "全站歷史徽章庫", view_lib: "點擊查看所有成就圖鑑", zero_msg: "您目前尚未擁有任何直播間徽章", count_pre: "收錄共", count_suf: "款", empty_lib: "您尚未獲得任何徽章",
                 flt_all: "全部", flt_owned: "已獲得", flt_unowned: "未獲得", zero_cta: "前往圖鑑查看",
                 n1:"本頁面呈現您的帳號所有徽章", n2:"帳號等級達到 VIP Level 60 可解鎖徽章更換", n3:"每次更換需等約 20 秒，請勿頻繁送出需求", n4:"徽章更換完成，可至直播間查看", n5:"徽章與等級需登入後完整顯示", n6:"資料至少需 10 分鐘更新時間", n7:"【重要】為了保護您的帳號，切勿將徽章介面分享給他人，以免造成帳號冒用或徽章損失。"
             },
             'en': { 
-                title:"Glory Badge Gallery", username: "Account: ", total:"Total Badges", my_lvl:"My VIP Level: ", btn:"Confirm", upgrade: "Upgrade", feat_h:"Badge Swap", vip_pre: "Reach", vip_suf: "to unlock badge swap", lock:"Ineligible", ok:"Unlocked", hint_sel:"Please select a badge below", hint_ready:"Selected", hint_pos:"Will replace the left badge. New badge shows on the right.", equipped: "Display Badges", empty: "No badges", login: "Please login", success: "✅ Success", cooldown: "⏳ Wait 20s", modal_btn: "OK", all_title: "Badge Collection", got_it: "Owned", sending: "Sending...", all_lib: "All Site Library", view_lib: "View all achievements", zero_msg: "No badges found", count_pre: "Total", count_suf: "badges",
+                title:"Glory Badge Gallery", username: "Account: ", total:"Total Badges", my_lvl:"My VIP Level: ", btn:"Confirm", upgrade: "Upgrade", feat_h:"Display & Swap Badges", vip_pre: "Reach", vip_suf: "to unlock badge swap", lock:"Ineligible", ok:"Unlocked", hint_sel:"Please select a badge below", hint_ready:"Selected", hint_pos:"Will replace the left badge. New badge shows on the right.", empty: "No badges", login: "Please login", success: "✅ Success", cooldown: "⏳ Wait 20s", modal_btn: "OK", all_title: "Badge Collection", got_it: "Owned", sending: "Sending...", all_lib: "All Site Library", view_lib: "View all achievements", zero_msg: "No badges found", count_pre: "Total", count_suf: "badges", empty_lib: "You haven't obtained any badges yet.",
                 flt_all: "All", flt_owned: "Owned", flt_unowned: "Not Owned", zero_cta: "View Collection",
                 n1:"This page shows all your account badges", n2:"Reach VIP Level 60 to unlock badge swap", n3:"Wait 20s between requests. Do not spam.", n4:"Check live rooms after completion.", n5:"Login required for full display", n6:"Allow 10 mins for data updates", n7:"[Important] Do not share this interface with others to avoid misuse."
             }
@@ -375,7 +381,6 @@
 
         function updateUIStrings() {
             const t = I18N[state.lang];
-            document.getElementById('lbl-equipped').innerText = t.equipped;
             document.getElementById('lbl-my-lvl').innerText = t.my_lvl;
             document.getElementById('ui-upgrade').innerText = t.upgrade;
             document.getElementById('lbl-total').innerText = t.total;
@@ -385,14 +390,9 @@
             document.getElementById('ui-all-title').innerText = t.all_title;
             document.getElementById('ui-feat-h').innerText = t.feat_h;
             
-            // 權限解鎖區塊文案
             if(document.getElementById('ui-vip-pre')) document.getElementById('ui-vip-pre').innerText = t.vip_pre;
             if(document.getElementById('ui-vip-suf')) document.getElementById('ui-vip-suf').innerText = t.vip_suf;
-            
-            // 操作提示區塊文案
             if(document.getElementById('ui-hint-pos')) document.getElementById('ui-hint-pos').innerText = t.hint_pos;
-            
-            // 總數顯示前後綴
             if(document.getElementById('lbl-count-pre')) document.getElementById('lbl-count-pre').innerText = t.count_pre;
             if(document.getElementById('lbl-count-suf')) document.getElementById('lbl-count-suf').innerText = t.count_suf;
 
@@ -408,7 +408,6 @@
             }
             document.getElementById('ui-modal-btn').innerText = t.modal_btn;
 
-            // 觸發 check() 更新已選或未選的動態文案
             check();
         }
 
@@ -428,8 +427,16 @@
                 const rawIds = (r.badges || []).filter(i => i.startsWith('campaign_'));
                 state.ownedIds = rawIds;
 
-                if (r.count === 0) { hero.style.display = 'block'; box.style.display = 'none'; document.querySelector('.instruction-area').style.display = 'none'; }
-                else { hero.style.display = 'none'; box.style.display = 'grid'; }
+                if (r.count === 0) { 
+                    hero.style.display = 'block'; 
+                    box.style.display = 'none'; 
+                    document.querySelector('.instruction-area').style.display = 'none';
+                    document.getElementById('management-area').style.display = 'none';
+                }
+                else { 
+                    hero.style.display = 'none'; 
+                    box.style.display = 'grid'; 
+                }
 
                 if(!isRefreshOnly || state.list.length === 0) {
                     state.list = await Promise.all(rawIds.map(async id => {
@@ -441,7 +448,7 @@
                 }
 
                 if (rawIds.length > 0) {
-                    document.getElementById('equipped-area').style.display = 'block';
+                    document.getElementById('management-area').style.display = 'block';
                     const lastId = rawIds[rawIds.length - 1];
                     const secondLastId = rawIds.length > 1 ? rawIds[rawIds.length - 2] : null;
                     const fetchName = async (id) => {
@@ -518,8 +525,9 @@
                 `;
             });
 
+            // 優化 3：無符合條件的徽章文案更新
             if(filteredHTML === '') {
-                filteredHTML = `<div style="text-align:center; padding: 40px; color: #94a3b8; font-weight: bold;">沒有符合條件的徽章</div>`;
+                filteredHTML = `<div style="text-align:center; padding: 40px; color: #94a3b8; font-size: 15px; font-weight: bold;">${t.empty_lib}</div>`;
             }
 
             list.innerHTML = filteredHTML;
@@ -541,12 +549,17 @@
             const card = document.getElementById('status-card'), authStatus = document.getElementById('ui-auth-status'), upgradeBtn = document.getElementById('ui-upgrade'), instArea = document.getElementById('ui-instruction'), hintLbl = document.getElementById('ui-hint-label'), hintVal = document.getElementById('ui-hint-value');
             
             if(state.level >= 60) {
-                card.classList.add('vip-active'); authStatus.innerText = t.ok; authStatus.className = "val-status unlocked"; upgradeBtn.style.display = "none";
+                if(card) card.classList.add('vip-active'); 
+                if(authStatus) { authStatus.innerText = t.ok; authStatus.className = "val-status unlocked"; }
+                if(upgradeBtn) upgradeBtn.style.display = "none";
                 if(state.list.length > 0) instArea.style.display = "block";
                 if(state.selected) { hintLbl.innerText = t.hint_ready; hintVal.innerText = state.selected.name; hintVal.className = "hint-value hint-selected"; }
                 else { hintLbl.innerText = t.hint_sel; hintVal.innerText = "---"; hintVal.className = "hint-value"; }
             } else { 
-                card.classList.remove('vip-active'); authStatus.innerText = t.lock; authStatus.className = "val-status"; upgradeBtn.style.display = "inline-block"; instArea.style.display = "none"; 
+                if(card) card.classList.remove('vip-active'); 
+                if(authStatus) { authStatus.innerText = t.lock; authStatus.className = "val-status"; }
+                if(upgradeBtn) upgradeBtn.style.display = "inline-block"; 
+                instArea.style.display = "none"; 
             }
         }
 
