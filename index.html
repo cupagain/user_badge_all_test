@@ -45,7 +45,7 @@
         }
         .username-line { font-size: 14px; font-weight: 700; color: var(--gold); margin-bottom: 20px; display: block; opacity: 0.9; }
 
-        /* 優化需求 1：極簡化徽章總數 */
+        /* 極簡化徽章總數 */
         .minimal-total-box {
             display: inline-flex; align-items: center; gap: 8px;
             border: 1px solid rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.05);
@@ -54,7 +54,7 @@
         .mt-label { font-size: 12px; font-weight: 600; color: var(--text-dim); }
         .mt-val { font-family: var(--font-head); font-size: 16px; font-weight: 800; color: var(--ice-blue); }
 
-        /* 優化需求 1：全站歷史徽章獨立大區塊 */
+        /* 全站歷史徽章獨立大區塊 */
         .hero-banner-wrap { max-width: 600px; margin: 0 auto 25px; padding: 0 16px; }
         .library-hero-card { 
             background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(251, 191, 36, 0.02) 100%); 
@@ -68,60 +68,66 @@
         .lh-info { text-align: left; }
         .lh-title { font-size: 16px; font-weight: 800; color: var(--gold); margin-bottom: 4px; display: block; }
         .lh-desc { font-size: 12px; color: #cbd5e1; font-weight: 600; }
-        .lh-count { font-family: var(--font-head); font-size: 24px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 6px; }
-        .lh-arrow { font-size: 14px; color: var(--gold); opacity: 0.8; }
+        /* 優化需求 5：增加前後綴文字，讓總數意義明確 */
+        .lh-count { font-family: var(--font-head); font-size: 24px; font-weight: 900; color: #fff; display: flex; align-items: baseline; gap: 4px; }
+        .lh-count-text { font-size: 12px; font-weight: 600; color: var(--text-dim); font-family: var(--font-body); }
+        .lh-arrow { font-size: 14px; color: var(--gold); opacity: 0.8; margin-left: 4px; }
 
-        /* 2. 帳號顯示徽章 */
+        /* 2. 帳號顯示徽章 (還原大小) */
         .equipped-section { max-width: 1000px; margin: 0 auto 20px; padding: 0 16px; }
         .section-title { font-size: 12px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; text-align: center; }
         .equipped-grid { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
         .equipped-box {
-            background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 24px;
-            padding: 20px 10px 10px; display: flex; flex-direction: column; align-items: center; text-align: center;
-            backdrop-filter: blur(10px); width: calc(50% - 7px); max-width: 160px;
+            background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 28px;
+            padding: 25px 10px 10px; display: flex; flex-direction: column; align-items: center; text-align: center;
+            backdrop-filter: blur(10px); width: calc(50% - 7px); max-width: 180px; transition: 0.3s;
         }
-        .equipped-box img { width: 60px; height: 60px; margin-bottom: 10px; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.6)); }
-        .equipped-box span { font-size: 12px; font-weight: 700; color: #fff; line-height: 1.3; height: 31px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        .equipped-box img { width: 75px; height: 75px; margin-bottom: 10px; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.6)); }
+        .equipped-box span { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.2; height: 32px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 
-        /* 優化需求 2：極簡化權限卡片 */
-        .control-section { max-width: 600px; margin: 0 auto 15px; padding: 0 16px; }
-        .compact-auth-card { 
-            background: var(--glass-deep); border: 1px solid var(--glass-border); border-radius: 20px; 
-            padding: 16px 20px; backdrop-filter: blur(30px); display: flex; align-items: center; justify-content: space-between;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        /* 優化需求 4：權限卡片放大、規則清楚 */
+        .control-section { max-width: 600px; margin: 0 auto 20px; padding: 0 16px; }
+        .auth-card { 
+            background: var(--glass-deep); border: 1px solid var(--glass-border); border-radius: 24px; 
+            padding: 20px 24px; backdrop-filter: blur(30px); display: flex; flex-direction: column; gap: 14px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
-        .compact-auth-card.vip-active { border-color: rgba(251, 191, 36, 0.4); }
-        .ca-left { display: flex; flex-direction: column; gap: 4px; }
-        .ca-title { font-size: 13px; font-weight: 800; color: #fff; }
-        .ca-subtitle { font-size: 11px; color: #94a3b8; font-weight: 600; display: flex; align-items: center; gap: 4px; }
-        .lvl-box { color: var(--gold); font-family: var(--font-head); font-weight: 800; }
+        .auth-card.vip-active { border-color: rgba(251, 191, 36, 0.4); }
+        .ac-header { display: flex; flex-direction: column; gap: 6px; border-bottom: 1px solid var(--glass-border); padding-bottom: 14px; }
+        .ac-title { font-family: var(--font-head); font-size: 18px; font-weight: 800; color: #fff; }
+        .ac-rule { font-size: 13.5px; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+        .lvl-box { border: 1px solid var(--gold); padding: 0 6px; border-radius: 4px; color: var(--gold); font-family: var(--font-head); font-weight: 800; font-size: 12px; }
         
-        .ca-right { display: flex; align-items: center; gap: 10px; }
-        .val-status { font-size: 13px; font-weight: 800; color: #64748b; }
+        .ac-body { display: flex; align-items: center; justify-content: space-between; }
+        .ac-my-lvl { font-size: 16px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px; }
+        .val-lvl-plain { font-family: var(--font-head); font-size: 24px; color: var(--gold); line-height: 1; }
+        .ac-status-area { display: flex; align-items: center; gap: 12px; }
+        .val-status { font-size: 14px; font-weight: 800; color: #64748b; }
         .val-status.unlocked { color: var(--gold); }
         .upgrade-cta-inline { 
             background: linear-gradient(135deg, var(--pink) 0%, #ff5e7e 100%);
-            color: #fff; font-size: 11px; font-weight: 800; padding: 6px 14px; border-radius: 8px;
+            color: #fff; font-size: 12px; font-weight: 800; padding: 6px 14px; border-radius: 8px;
             text-decoration: none; display: none; box-shadow: 0 4px 10px rgba(244, 63, 94, 0.3);
             white-space: nowrap;
         }
 
-        /* 4. 徽章更換提示 */
-        .instruction-area { text-align: center; margin-bottom: 15px; min-height: 40px; padding: 0 20px; }
-        .hint-label { font-size: 11px; font-weight: 700; color: #94a3b8; display: block; margin-bottom: 4px; }
-        .hint-value { font-size: 15px; font-weight: 800; color: #fff; display: block; }
+        /* 4. 徽章更換提示 (還原原文案與排版) */
+        .instruction-area { text-align: center; margin-bottom: 15px; min-height: 48px; padding: 0 20px; }
+        .hint-label { font-size: 11px; font-weight: 700; color: #94a3b8; display: block; margin-bottom: 4px; text-transform: uppercase; }
+        .hint-pos-warn { font-size: 11px; font-weight: 600; color: var(--gold); opacity: 0.8; margin-top: 4px; display: block; margin-bottom: 6px; }
+        .hint-value { font-size: 16px; font-weight: 800; color: #fff; display: block; }
         .hint-selected { color: var(--ice-blue); }
 
-        /* 網格區塊 */
+        /* 網格區塊 (還原大小) */
         .badge-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; padding: 0 16px 30px; max-width: 1000px; margin: 0 auto; justify-content: center; }
         @media (min-width: 768px) { .badge-grid { grid-template-columns: repeat(auto-fit, 180px); justify-content: center; } }
-        .badge-item { background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 24px; padding: 25px 10px 15px; text-align: center; cursor: pointer; position: relative; transition: 0.3s; display: flex; flex-direction: column; align-items: center; height: 100%; }
-        .badge-item.selected { border-color: var(--gold); background: rgba(251, 191, 36, 0.12); transform: translateY(-2px); }
-        .badge-item.selected::after { content: '✓'; position: absolute; top: 10px; right: 15px; color: var(--gold); font-weight: 900; font-size: 16px; }
-        .badge-img { width: 65px; height: 65px; margin-bottom: 12px; filter: drop-shadow(0 8px 12px rgba(0,0,0,0.3)); pointer-events: none; }
-        .badge-name { font-size: 13px; font-weight: 700; color: #f1f5f9; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-all; pointer-events: none; margin-bottom: 8px; }
+        .badge-item { background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 28px; padding: 30px 10px 10px; text-align: center; cursor: pointer; position: relative; transition: 0.3s; display: flex; flex-direction: column; align-items: center; height: 100%; }
+        .badge-item.selected { border-color: var(--gold); background: rgba(251, 191, 36, 0.12); transform: scale(1.02); }
+        .badge-item.selected::after { content: '✓'; position: absolute; top: 12px; right: 15px; color: var(--gold); font-weight: 900; font-size: 18px; }
+        .badge-img { width: 75px; height: 75px; margin-bottom: 12px; filter: drop-shadow(0 8px 12px rgba(0,0,0,0.3)); pointer-events: none; }
+        .badge-name { font-size: 14px; font-weight: 700; color: #f1f5f9; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-all; pointer-events: none; margin-bottom: 5px; }
 
-        .inline-confirm-btn { background: var(--gold); color: #000; border: none; padding: 8px 0; width: 90%; border-radius: 8px; font-family: var(--font-head); font-size: 12px; font-weight: 900; cursor: pointer; box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4); animation: fadeIn 0.2s ease forwards; margin-top: auto; }
+        .inline-confirm-btn { background: var(--gold); color: #000; border: none; padding: 8px 0; width: 90%; border-radius: 10px; font-family: var(--font-head); font-size: 13px; font-weight: 900; cursor: pointer; box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4); animation: fadeIn 0.3s ease forwards; margin-top: auto; }
         .inline-confirm-btn.submitting { opacity: 0.7; cursor: wait; filter: grayscale(0.5); }
 
         /* 零徽章引導 */
@@ -136,13 +142,12 @@
         .notice-item::before { content: "•"; color: #64748b; font-weight: 900; font-size: 16px; line-height: 1.2; flex-shrink: 0; margin-top: 1px; }
         .notice-alert { color: var(--pink) !important; font-weight: 800 !important; }
 
-        /* 優化需求 3：圖鑑面板與分類篩選 */
+        /* 圖鑑面板與分類篩選 */
         .full-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); backdrop-filter: blur(20px); z-index: 15000; display: none; flex-direction: column; animation: fadeIn 0.2s ease; }
         .overlay-header { padding: 25px 20px 15px; text-align: center; position: relative; flex-shrink: 0; }
         .overlay-title { font-family: var(--font-head); font-size: 20px; font-weight: 900; color: #fff; }
         .close-overlay { position: absolute; right: 20px; top: 20px; font-size: 28px; color: #94a3b8; cursor: pointer; border: none; background: none; }
         
-        /* 新增：篩選器列 */
         .overlay-filters { display: flex; justify-content: center; gap: 10px; padding: 0 20px 15px; border-bottom: 1px solid var(--glass-border); flex-shrink: 0; }
         .filter-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: #94a3b8; padding: 8px 16px; border-radius: 100px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.2s; }
         .filter-btn.active { background: var(--gold); color: #000; border-color: var(--gold); }
@@ -155,7 +160,6 @@
         .lib-img { width: 50px; height: 50px; flex-shrink: 0; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5)); margin-top: 4px; }
         
         .lib-info { flex: 1; min-width: 0; text-align: left; }
-        /* 解決排版重疊：將標籤移入 Flex 標題列 */
         .lib-header-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 4px; }
         .lib-name { font-size: 14px; font-weight: 800; color: #fff; line-height: 1.3; }
         .owned-tag { background: rgba(251, 191, 36, 0.15); color: var(--gold); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 800; flex-shrink: 0; border: 1px solid rgba(251, 191, 36, 0.3); }
@@ -199,7 +203,10 @@
                 <span class="lh-desc" id="lbl-view-lib">點擊查看所有成就圖鑑</span>
             </div>
             <div class="lh-count">
-                <span id="ui-total-db-count">--</span> <span class="lh-arrow">➔</span>
+                <span class="lh-count-text" id="lbl-count-pre">收錄共</span> 
+                <span id="ui-total-db-count">--</span> 
+                <span class="lh-count-text" id="lbl-count-suf">款</span> 
+                <span class="lh-arrow">➔</span>
             </div>
         </div>
     </div>
@@ -210,20 +217,24 @@
     </section>
 
     <section class="control-section">
-        <div class="compact-auth-card" id="status-card">
-            <div class="ca-left">
-                <span class="ca-title" id="ui-feat-h">專屬徽章更換</span>
-                <span class="ca-subtitle"><span id="lbl-my-lvl">目前等級：</span> <span class="lvl-box" id="ui-level">--</span> (<span id="ui-vip-req">LV 60 解鎖</span>)</span>
+        <div class="auth-card" id="status-card">
+            <div class="ac-header">
+                <span class="ac-title" id="ui-feat-h">帳號徽章更換</span>
+                <div class="ac-rule"><span id="ui-vip-pre">等級至</span><span class="lvl-box">VIP Level 60</span><span id="ui-vip-suf">可解鎖徽章更換</span></div>
             </div>
-            <div class="ca-right">
-                <span class="val-status" id="ui-auth-status">未達標</span>
-                <a href="https://swag.live/settings/vvip" target="_blank" class="upgrade-cta-inline" id="ui-upgrade">立即升級</a>
+            <div class="ac-body">
+                <span class="ac-my-lvl"><span id="lbl-my-lvl">我的 VIP 等級：</span> <span class="val-lvl-plain" id="ui-level">--</span></span>
+                <div class="ac-status-area">
+                    <span class="val-status" id="ui-auth-status">未達標</span>
+                    <a href="https://swag.live/settings/vvip" target="_blank" class="upgrade-cta-inline" id="ui-upgrade">立即升級</a>
+                </div>
             </div>
         </div>
     </section>
 
     <div class="instruction-area" id="ui-instruction" style="display: none;">
-        <span class="hint-label" id="ui-hint-label">選取下方徽章進行更換</span>
+        <span class="hint-label" id="ui-hint-label">請選取下方想更換徽章</span>
+        <span class="hint-pos-warn" id="ui-hint-pos">將替換左側徽章，上架之徽章呈現於右側</span>
         <span class="hint-value" id="ui-hint-value">---</span>
     </div>
 
@@ -337,12 +348,12 @@
 
         const I18N = {
             'zh-hant': { 
-                title:"我的榮耀徽章全覽", username: "帳號：", total:"帳號徽章總數", my_lvl:"目前等級：", btn:"確認上架", upgrade: "立即升級", feat_h:"專屬徽章更換", vip_req: "LV 60 解鎖", lock:"未達標", ok:"已解鎖", hint_sel:"選取下方徽章進行更換", hint_ready:"即將更換為", equipped: "帳號顯示徽章", empty: "暫無可選徽章", login: "請登入後查看徽章", success: "✅ 送出成功", cooldown: "⏳ 請等待至少 20 秒再送出請求", modal_btn: "確定", all_title: "全站歷史徽章圖鑑", got_it: "已獲得", sending: "處理中...", all_lib: "全站歷史徽章庫", view_lib: "點擊查看所有成就圖鑑", zero_msg: "您目前尚未擁有任何直播間徽章",
+                title:"我的榮耀徽章全覽", username: "帳號：", total:"帳號徽章總數", my_lvl:"我的 VIP 等級：", btn:"確認上架", upgrade: "立即升級", feat_h:"帳號徽章更換", vip_pre: "等級至", vip_suf: "可解鎖徽章更換", lock:"未達標", ok:"已解鎖", hint_sel:"請選取下方想更換徽章", hint_ready:"已選取", hint_pos:"將替換左側徽章，上架之徽章呈現於右側", equipped: "帳號顯示徽章", empty: "暫無可選徽章", login: "請登入後查看徽章", success: "✅ 送出成功", cooldown: "⏳ 請等待至少 20 秒再送出請求", modal_btn: "確定", all_title: "全站歷史徽章圖鑑", got_it: "已獲得", sending: "處理中...", all_lib: "全站歷史徽章庫", view_lib: "點擊查看所有成就圖鑑", zero_msg: "您目前尚未擁有任何直播間徽章", count_pre: "收錄共", count_suf: "款",
                 flt_all: "全部", flt_owned: "已獲得", flt_unowned: "未獲得", zero_cta: "前往圖鑑查看",
                 n1:"本頁面呈現您的帳號所有徽章", n2:"帳號等級達到 VIP Level 60 可解鎖徽章更換", n3:"每次更換需等約 20 秒，請勿頻繁送出需求", n4:"徽章更換完成，可至直播間查看", n5:"徽章與等級需登入後完整顯示", n6:"資料至少需 10 分鐘更新時間", n7:"【重要】為了保護您的帳號，切勿將徽章介面分享給他人，以免造成帳號冒用或徽章損失。"
             },
             'en': { 
-                title:"Glory Badge Gallery", username: "Account: ", total:"Total Badges", my_lvl:"Current Level: ", btn:"Confirm", upgrade: "Upgrade", feat_h:"Badge Swap", vip_req: "LV 60 Unlock", lock:"Ineligible", ok:"Unlocked", hint_sel:"Select a badge below", hint_ready:"Changing to", equipped: "Display Badges", empty: "No badges", login: "Please login", success: "✅ Success", cooldown: "⏳ Wait 20s", modal_btn: "OK", all_title: "Badge Collection", got_it: "Owned", sending: "Sending...", all_lib: "All Site Library", view_lib: "View all achievements", zero_msg: "No badges found",
+                title:"Glory Badge Gallery", username: "Account: ", total:"Total Badges", my_lvl:"My VIP Level: ", btn:"Confirm", upgrade: "Upgrade", feat_h:"Badge Swap", vip_pre: "Reach", vip_suf: "to unlock badge swap", lock:"Ineligible", ok:"Unlocked", hint_sel:"Please select a badge below", hint_ready:"Selected", hint_pos:"Will replace the left badge. New badge shows on the right.", equipped: "Display Badges", empty: "No badges", login: "Please login", success: "✅ Success", cooldown: "⏳ Wait 20s", modal_btn: "OK", all_title: "Badge Collection", got_it: "Owned", sending: "Sending...", all_lib: "All Site Library", view_lib: "View all achievements", zero_msg: "No badges found", count_pre: "Total", count_suf: "badges",
                 flt_all: "All", flt_owned: "Owned", flt_unowned: "Not Owned", zero_cta: "View Collection",
                 n1:"This page shows all your account badges", n2:"Reach VIP Level 60 to unlock badge swap", n3:"Wait 20s between requests. Do not spam.", n4:"Check live rooms after completion.", n5:"Login required for full display", n6:"Allow 10 mins for data updates", n7:"[Important] Do not share this interface with others to avoid misuse."
             }
@@ -373,7 +384,18 @@
             document.getElementById('ui-title').innerText = t.title;
             document.getElementById('ui-all-title').innerText = t.all_title;
             document.getElementById('ui-feat-h').innerText = t.feat_h;
-            document.getElementById('ui-vip-req').innerText = t.vip_req;
+            
+            // 權限解鎖區塊文案
+            if(document.getElementById('ui-vip-pre')) document.getElementById('ui-vip-pre').innerText = t.vip_pre;
+            if(document.getElementById('ui-vip-suf')) document.getElementById('ui-vip-suf').innerText = t.vip_suf;
+            
+            // 操作提示區塊文案
+            if(document.getElementById('ui-hint-pos')) document.getElementById('ui-hint-pos').innerText = t.hint_pos;
+            
+            // 總數顯示前後綴
+            if(document.getElementById('lbl-count-pre')) document.getElementById('lbl-count-pre').innerText = t.count_pre;
+            if(document.getElementById('lbl-count-suf')) document.getElementById('lbl-count-suf').innerText = t.count_suf;
+
             document.getElementById('ui-zero-msg').innerText = t.zero_msg;
             document.getElementById('ui-zero-cta').innerText = t.zero_cta;
             document.getElementById('flt-all').innerText = t.flt_all;
@@ -385,6 +407,9 @@
                 if(el) el.innerText = t[`n${i}`];
             }
             document.getElementById('ui-modal-btn').innerText = t.modal_btn;
+
+            // 觸發 check() 更新已選或未選的動態文案
+            check();
         }
 
         async function init(isRefreshOnly = false) {
@@ -433,13 +458,11 @@
             } catch (e) { box.innerHTML = "Error Loading Data"; }
         }
 
-        // 開關圖鑑
         function toggleAllBadges(show) {
             const overlay = document.getElementById('all-badges-overlay');
             if (show) {
                 overlay.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
-                // 重置為全部標籤
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 document.getElementById('flt-all').classList.add('active');
                 renderLibrary('all');
@@ -449,7 +472,6 @@
             }
         }
 
-        // 渲染圖鑑清單 (包含過濾功能)
         function renderLibrary(filterType, btnElem = null) {
             state.currentFilter = filterType;
             if (btnElem) {
@@ -480,7 +502,6 @@
                     dateHtml = `<div class="lib-date">🗓 ${dateMatch[1]}</div>`;
                 }
 
-                /* 優化：將 Owned 標籤移入標題旁的 Flex 內，杜絕覆蓋重疊 */
                 filteredHTML += `
                     <div class="lib-card ${isOwned ? 'owned' : ''}">
                         <img class="lib-img" src="${CFG.img}${renderImg}.svg" onerror="this.src='${CFG.img}default.svg'">
