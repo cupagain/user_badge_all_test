@@ -35,7 +35,7 @@
         .lang-btn.active { background: #fff; color: #000; border-color: #fff; }
 
         /* 1. 標題與基礎資訊 */
-        .header-area { text-align: center; padding: 70px 20px 5px; } /* 優化 2：縮減底部 padding */
+        .header-area { text-align: center; padding: 70px 20px 5px; }
         @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
         .main-title { 
             font-family: var(--font-head); font-size: 30px; font-weight: 900; letter-spacing: -1px; margin-bottom: 8px;
@@ -45,7 +45,6 @@
         }
         .username-line { font-size: 14px; font-weight: 700; color: var(--gold); margin-bottom: 20px; display: block; opacity: 0.9; }
 
-        /* 優化 1 & 2：微幅放大總數，並縮小下方 margin */
         .minimal-total-box {
             display: inline-flex; align-items: center; gap: 10px;
             border: 1px solid rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.05);
@@ -55,7 +54,7 @@
         .mt-val { font-family: var(--font-head); font-size: 18px; font-weight: 800; color: var(--ice-blue); }
 
         /* 全站歷史徽章獨立大區塊 */
-        .hero-banner-wrap { max-width: 600px; margin: 0 auto 20px; padding: 0 16px; } /* 優化 2：縮小下方 margin */
+        .hero-banner-wrap { max-width: 600px; margin: 0 auto 20px; padding: 0 16px; }
         .library-hero-card { 
             background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(251, 191, 36, 0.02) 100%); 
             border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 20px;
@@ -72,7 +71,7 @@
         .lh-count-text { font-size: 12px; font-weight: 600; color: var(--text-dim); font-family: var(--font-body); }
         .lh-arrow { font-size: 14px; color: var(--gold); opacity: 0.8; margin-left: 4px; }
 
-        /* 優化 4：將顯示徽章與更換規則合併為單一關聯面板 */
+        /* 帳號專屬管理面板 */
         .management-section { max-width: 600px; margin: 0 auto 20px; padding: 0 16px; }
         .management-card { 
             background: var(--glass-deep); border: 1px solid var(--glass-border); border-radius: 28px; 
@@ -81,29 +80,47 @@
         }
         .management-card.vip-active { border-color: rgba(251, 191, 36, 0.4); }
         
-        .mc-header { text-align: center; }
-        .mc-title { font-size: 16px; font-weight: 800; color: #fff; letter-spacing: 1px; font-family: var(--font-head); }
+        /* 優化 1：將解鎖條件移至標題正下方 */
+        .mc-header { text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center; }
+        .mc-title { font-size: 18px; font-weight: 800; color: #fff; letter-spacing: 1px; font-family: var(--font-head); }
+        .ac-rule-top { font-size: 13px; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; }
+        .lvl-box { border: 1px solid var(--gold); padding: 0 6px; border-radius: 4px; color: var(--gold); font-family: var(--font-head); font-weight: 800; font-size: 12px; }
 
-        /* 裝備區網格 (維持 75x75 尺寸要求) */
-        .equipped-grid { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+        /* 優化 2：專屬且尊榮的裝備中徽章視覺 */
+        .equipped-grid { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 4px; }
         .equipped-box {
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px;
-            padding: 20px 10px 10px; display: flex; flex-direction: column; align-items: center; text-align: center;
-            width: calc(50% - 7px); max-width: 180px; 
+            background: linear-gradient(180deg, rgba(251, 191, 36, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(251, 191, 36, 0.35); 
+            border-radius: 24px;
+            padding: 24px 10px 14px; 
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+            width: calc(50% - 8px); max-width: 180px; 
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative; overflow: hidden;
         }
-        .equipped-box img { width: 75px; height: 75px; margin-bottom: 10px; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.6)); }
-        .equipped-box span { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.2; height: 32px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        /* 頂部增加微光線條 */
+        .equipped-box::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1.5px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0.7;
+        }
+        .equipped-box img { 
+            width: 80px; height: 80px; margin-bottom: 12px; 
+            filter: drop-shadow(0 12px 18px rgba(0,0,0,0.8)); /* 強化陰影讓圖像更立體 */
+            transform: scale(1.05); /* 微幅放大 */
+        }
+        .equipped-box span { 
+            font-size: 13px; font-weight: 800; color: var(--gold); /* 文字鑲金 */
+            line-height: 1.2; height: 32px; overflow: hidden; display: -webkit-box; 
+            -webkit-line-clamp: 2; -webkit-box-orient: vertical; text-shadow: 0 2px 4px rgba(0,0,0,0.6); 
+        }
 
-        /* 面板分隔線與規則區 */
+        /* 面板分隔線與單純的狀態區 */
         .mc-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--glass-border), transparent); margin: 0 10px; }
         
         .mc-vip-area { display: flex; align-items: center; justify-content: space-between; padding: 0 5px; flex-wrap: wrap; gap: 12px; }
-        .vip-rule-group { display: flex; flex-direction: column; gap: 6px; text-align: left; }
-        .ac-rule { font-size: 13px; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; gap: 6px; }
-        .lvl-box { border: 1px solid var(--gold); padding: 0 6px; border-radius: 4px; color: var(--gold); font-family: var(--font-head); font-weight: 800; font-size: 12px; }
-        
         .ac-my-lvl { font-size: 14px; font-weight: 700; color: #94a3b8; display: flex; align-items: center; gap: 8px; }
-        .val-lvl-plain { font-family: var(--font-head); font-size: 20px; color: var(--gold); line-height: 1; font-weight: 800; }
+        .val-lvl-plain { font-family: var(--font-head); font-size: 22px; color: var(--gold); line-height: 1; font-weight: 900; }
 
         .ac-status-area { display: flex; align-items: center; gap: 12px; }
         .val-status { font-size: 14px; font-weight: 800; color: #64748b; }
@@ -122,7 +139,7 @@
         .hint-value { font-size: 16px; font-weight: 800; color: #fff; display: block; }
         .hint-selected { color: var(--ice-blue); }
 
-        /* 網格區塊 (還原大小) */
+        /* 網格區塊 */
         .badge-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; padding: 0 16px 30px; max-width: 1000px; margin: 0 auto; justify-content: center; }
         @media (min-width: 768px) { .badge-grid { grid-template-columns: repeat(auto-fit, 180px); justify-content: center; } }
         .badge-item { background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 28px; padding: 30px 10px 10px; text-align: center; cursor: pointer; position: relative; transition: 0.3s; display: flex; flex-direction: column; align-items: center; height: 100%; }
@@ -219,6 +236,7 @@
         <div class="management-card" id="status-card">
             <div class="mc-header">
                 <span class="mc-title" id="ui-feat-h">帳號顯示與更換徽章</span>
+                <div class="ac-rule-top"><span id="ui-vip-pre">等級至</span> <span class="lvl-box">VIP Level 60</span> <span id="ui-vip-suf">可解鎖徽章更換</span></div>
             </div>
             
             <div class="equipped-grid" id="equipped-display-grid"></div>
@@ -226,10 +244,7 @@
             <div class="mc-divider"></div>
             
             <div class="mc-vip-area">
-                <div class="vip-rule-group">
-                    <div class="ac-rule"><span id="ui-vip-pre">等級至</span> <span class="lvl-box">VIP Level 60</span> <span id="ui-vip-suf">可解鎖徽章更換</span></div>
-                    <span class="ac-my-lvl"><span id="lbl-my-lvl">我的 VIP 等級：</span> <span class="val-lvl-plain" id="ui-level">--</span></span>
-                </div>
+                <div class="ac-my-lvl"><span id="lbl-my-lvl">我的 VIP 等級：</span> <span class="val-lvl-plain" id="ui-level">--</span></div>
                 <div class="ac-status-area">
                     <span class="val-status" id="ui-auth-status">未達標</span>
                     <a href="https://swag.live/settings/vvip" target="_blank" class="upgrade-cta-inline" id="ui-upgrade">立即升級</a>
@@ -525,7 +540,6 @@
                 `;
             });
 
-            // 優化 3：無符合條件的徽章文案更新
             if(filteredHTML === '') {
                 filteredHTML = `<div style="text-align:center; padding: 40px; color: #94a3b8; font-size: 15px; font-weight: bold;">${t.empty_lib}</div>`;
             }
