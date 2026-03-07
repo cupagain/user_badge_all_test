@@ -80,13 +80,12 @@
         }
         .management-card.vip-active { border-color: rgba(251, 191, 36, 0.4); }
         
-        /* 優化 1：將解鎖條件移至標題正下方 */
         .mc-header { text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center; }
         .mc-title { font-size: 18px; font-weight: 800; color: #fff; letter-spacing: 1px; font-family: var(--font-head); }
         .ac-rule-top { font-size: 13px; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; }
         .lvl-box { border: 1px solid var(--gold); padding: 0 6px; border-radius: 4px; color: var(--gold); font-family: var(--font-head); font-weight: 800; font-size: 12px; }
 
-        /* 優化 2：專屬且尊榮的裝備中徽章視覺 */
+        /* 專屬裝備中徽章視覺 */
         .equipped-grid { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 4px; }
         .equipped-box {
             background: linear-gradient(180deg, rgba(251, 191, 36, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
@@ -98,7 +97,6 @@
             box-shadow: 0 8px 25px rgba(251, 191, 36, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1);
             position: relative; overflow: hidden;
         }
-        /* 頂部增加微光線條 */
         .equipped-box::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1.5px;
             background: linear-gradient(90deg, transparent, var(--gold), transparent);
@@ -106,16 +104,17 @@
         }
         .equipped-box img { 
             width: 80px; height: 80px; margin-bottom: 12px; 
-            filter: drop-shadow(0 12px 18px rgba(0,0,0,0.8)); /* 強化陰影讓圖像更立體 */
-            transform: scale(1.05); /* 微幅放大 */
+            filter: drop-shadow(0 12px 18px rgba(0,0,0,0.8)); 
+            transform: scale(1.05); 
         }
+        /* 優化 2：文字色彩改回白色避免視覺疲勞，維持稍微粗體 */
         .equipped-box span { 
-            font-size: 13px; font-weight: 800; color: var(--gold); /* 文字鑲金 */
+            font-size: 13px; font-weight: 700; color: #fff; 
             line-height: 1.2; height: 32px; overflow: hidden; display: -webkit-box; 
             -webkit-line-clamp: 2; -webkit-box-orient: vertical; text-shadow: 0 2px 4px rgba(0,0,0,0.6); 
         }
 
-        /* 面板分隔線與單純的狀態區 */
+        /* 面板分隔線與狀態區 */
         .mc-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--glass-border), transparent); margin: 0 10px; }
         
         .mc-vip-area { display: flex; align-items: center; justify-content: space-between; padding: 0 5px; flex-wrap: wrap; gap: 12px; }
@@ -236,7 +235,7 @@
         <div class="management-card" id="status-card">
             <div class="mc-header">
                 <span class="mc-title" id="ui-feat-h">帳號顯示與更換徽章</span>
-                <div class="ac-rule-top"><span id="ui-vip-pre">等級至</span> <span class="lvl-box">VIP Level 60</span> <span id="ui-vip-suf">可解鎖徽章更換</span></div>
+                <div class="ac-rule-top"><span id="ui-vip-pre">達</span> <span class="lvl-box">VIP 60</span> <span id="ui-vip-suf">解鎖徽章更換</span></div>
             </div>
             
             <div class="equipped-grid" id="equipped-display-grid"></div>
@@ -369,14 +368,14 @@
 
         const I18N = {
             'zh-hant': { 
-                title:"我的榮耀徽章全覽", username: "帳號：", total:"帳號徽章總數", my_lvl:"我的 VIP 等級：", btn:"確認上架", upgrade: "立即升級", feat_h:"帳號顯示與更換徽章", vip_pre: "等級至", vip_suf: "可解鎖徽章更換", lock:"未達標", ok:"已解鎖", hint_sel:"請選取下方想更換徽章", hint_ready:"已選取", hint_pos:"將替換左側徽章，上架之徽章呈現於右側", empty: "暫無可選徽章", login: "請登入後查看徽章", success: "✅ 送出成功", cooldown: "⏳ 請等待至少 20 秒再送出請求", modal_btn: "確定", all_title: "全站歷史徽章圖鑑", got_it: "已獲得", sending: "處理中...", all_lib: "全站歷史徽章庫", view_lib: "點擊查看所有成就圖鑑", zero_msg: "您目前尚未擁有任何直播間徽章", count_pre: "收錄共", count_suf: "款", empty_lib: "您尚未獲得任何徽章",
+                title:"我的榮耀徽章全覽", username: "帳號：", total:"帳號徽章總數", my_lvl:"我的 VIP 等級：", btn:"確認上架", upgrade: "立即升級", feat_h:"帳號顯示與更換徽章", vip_pre: "達", vip_suf: "解鎖徽章更換", lock:"未達標", ok:"已解鎖", hint_sel:"請選取下方想更換徽章", hint_ready:"已選取", hint_pos:"將替換左側徽章，上架之徽章呈現於右側", empty: "暫無可選徽章", login: "請登入後查看徽章", success: "✅ 送出成功", cooldown: "⏳ 請等待至少 20 秒再送出請求", modal_btn: "確定", all_title: "全站歷史徽章圖鑑", got_it: "已獲得", sending: "處理中...", all_lib: "全站歷史徽章庫", view_lib: "點擊查看所有成就圖鑑", zero_msg: "您目前尚未擁有任何直播間徽章", count_pre: "收錄共", count_suf: "款", empty_lib: "您尚未獲得任何徽章",
                 flt_all: "全部", flt_owned: "已獲得", flt_unowned: "未獲得", zero_cta: "前往圖鑑查看",
-                n1:"本頁面呈現您的帳號所有徽章", n2:"帳號等級達到 VIP Level 60 可解鎖徽章更換", n3:"每次更換需等約 20 秒，請勿頻繁送出需求", n4:"徽章更換完成，可至直播間查看", n5:"徽章與等級需登入後完整顯示", n6:"資料至少需 10 分鐘更新時間", n7:"【重要】為了保護您的帳號，切勿將徽章介面分享給他人，以免造成帳號冒用或徽章損失。"
+                n1:"本頁面呈現您的帳號所有徽章", n2:"帳號達到 VIP 60 可解鎖徽章更換", n3:"每次更換需等約 20 秒，請勿頻繁送出需求", n4:"徽章更換完成，可至直播間查看", n5:"徽章與等級需登入後完整顯示", n6:"資料至少需 10 分鐘更新時間", n7:"【重要】為了保護您的帳號，切勿將徽章介面分享給他人，以免造成帳號冒用或徽章損失。"
             },
             'en': { 
                 title:"Glory Badge Gallery", username: "Account: ", total:"Total Badges", my_lvl:"My VIP Level: ", btn:"Confirm", upgrade: "Upgrade", feat_h:"Display & Swap Badges", vip_pre: "Reach", vip_suf: "to unlock badge swap", lock:"Ineligible", ok:"Unlocked", hint_sel:"Please select a badge below", hint_ready:"Selected", hint_pos:"Will replace the left badge. New badge shows on the right.", empty: "No badges", login: "Please login", success: "✅ Success", cooldown: "⏳ Wait 20s", modal_btn: "OK", all_title: "Badge Collection", got_it: "Owned", sending: "Sending...", all_lib: "All Site Library", view_lib: "View all achievements", zero_msg: "No badges found", count_pre: "Total", count_suf: "badges", empty_lib: "You haven't obtained any badges yet.",
                 flt_all: "All", flt_owned: "Owned", flt_unowned: "Not Owned", zero_cta: "View Collection",
-                n1:"This page shows all your account badges", n2:"Reach VIP Level 60 to unlock badge swap", n3:"Wait 20s between requests. Do not spam.", n4:"Check live rooms after completion.", n5:"Login required for full display", n6:"Allow 10 mins for data updates", n7:"[Important] Do not share this interface with others to avoid misuse."
+                n1:"This page shows all your account badges", n2:"Reach VIP 60 to unlock badge swap", n3:"Wait 20s between requests. Do not spam.", n4:"Check live rooms after completion.", n5:"Login required for full display", n6:"Allow 10 mins for data updates", n7:"[Important] Do not share this interface with others to avoid misuse."
             }
         };
 
